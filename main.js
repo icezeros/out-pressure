@@ -140,8 +140,8 @@ app.on('ready', () => {
   // console.log('============  =============');
   // console.log(`file://${path.join(__dirname, './render/dist/index.html')}`);
   // mainWindow.loadURL(`file://${path.join(__dirname, './view/dist/index.html')}`);
-  mainWindow.loadURL('http://localhost:8000');
-  // mainWindow.loadURL('http://localhost:3000');
+  // mainWindow.loadURL('http://localhost:8000');
+  mainWindow.loadURL('http://localhost:3000');
   // loadURL(mainWindow);
   // mainWindow.loadURL('app://');
   // mainWindow.loadURL('file:///Users/huguosen/Documents/GitHub/ant-design-pro/dist/index.html');
