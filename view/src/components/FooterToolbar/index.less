@@ -1,6 +1,8 @@
-@import '~antd/lib/style/themes/default.less';
+@import "../index";
 
-.toolbar {
+@footer-toolbar-prefix-cls: ~"@{ant-pro-prefix}-footer-toolbar";
+
+.@{footer-toolbar-prefix-cls} {
   position: fixed;
   width: 100%;
   bottom: 0;
@@ -9,25 +11,13 @@
   line-height: 56px;
   box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.03);
   background: #fff;
-  border-top: 1px solid @border-color-split;
+  border-top: 1px solid #e8e8e8;
   padding: 0 24px;
   z-index: 9;
 
   &:after {
-    content: '';
+    content: "";
     display: block;
     clear: both;
-  }
-
-  .left {
-    float: left;
-  }
-
-  .right {
-    float: right;
-  }
-
-  button + button {
-    margin-left: 8px;
   }
 }

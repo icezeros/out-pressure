@@ -1,6 +1,8 @@
-@import '~antd/lib/style/themes/default.less';
+@import "../index";
 
-.trendItem {
+@trend-prefix-cls: ~"@{ant-pro-prefix}-trend";
+
+.@{trend-prefix-cls} {
   display: inline-block;
   font-size: @font-size-base;
   line-height: 22px;
@@ -10,11 +12,19 @@
     margin-left: 4px;
     position: relative;
     top: 1px;
+
     i {
       font-size: 12px;
       transform: scale(0.83);
     }
   }
+
+  .item-text {
+    display: inline-block;
+    margin-left: 8px;
+    color: rgba(0,0,0,.85);
+  }
+
   .up {
     color: @red-6;
   }
@@ -23,15 +33,10 @@
     top: -1px;
   }
 
-  &.trendItemGrey .up,
-  &.trendItemGrey .down {
-    color: @text-color;
-  }
-
-  &.reverseColor .up {
+  &.reverse-color .up {
     color: @green-6;
   }
-  &.reverseColor .down {
+  &.reverse-color .down {
     color: @red-6;
   }
 }
