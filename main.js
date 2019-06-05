@@ -11,7 +11,7 @@ console.log('============ server =============');
 console.log(server);
 server();
 
-const { app, BrowserWindow } = electron;
+const { app, BrowserWindow, ipcMain } = electron;
 
 // simple parameters initialization
 const electronConfig = {
@@ -24,8 +24,7 @@ const electronConfig = {
   URL_LAUNCHER_HEIGHT: parseInt(process.env.URL_LAUNCHER_HEIGHT || 800, 10),
   URL_LAUNCHER_TITLE: process.env.URL_LAUNCHER_TITLE || 'RESIN.IO',
   URL_LAUNCHER_CONSOLE: process.env.URL_LAUNCHER_CONSOLE === '1' ? 1 : 0,
-  URL_LAUNCHER_URL:
-    process.env.URL_LAUNCHER_URL || `file:///${path.join(__dirname, 'data', 'index.html')}`,
+  URL_LAUNCHER_URL: process.env.URL_LAUNCHER_URL || `file:///${path.join(__dirname, 'data', 'index.html')}`,
   URL_LAUNCHER_ZOOM: parseFloat(process.env.URL_LAUNCHER_ZOOM || 1.0),
   URL_LAUNCHER_OVERLAY_SCROLLBARS: process.env.URL_LAUNCHER_OVERLAY_SCROLLBARS === '1' ? 1 : 0,
   ELECTRON_ENABLE_HW_ACCELERATION: process.env.ELECTRON_ENABLE_HW_ACCELERATION === '1',
@@ -63,8 +62,8 @@ if (electronConfig.ELECTRON_USER_DATA_DIR) {
 if (process.env.NODE_ENV === 'development') {
   console.log('Running in development mode');
   Object.assign(electronConfig, {
-    URL_LAUNCHER_HEIGHT: 600,
-    URL_LAUNCHER_WIDTH: 800,
+    URL_LAUNCHER_HEIGHT: 800,
+    URL_LAUNCHER_WIDTH: 1280,
     URL_LAUNCHER_KIOSK: 0,
     URL_LAUNCHER_CONSOLE: 1,
     URL_LAUNCHER_FRAME: 1,
@@ -78,12 +77,12 @@ if (electronConfig.ELECTRON_RESIN_UPDATE_LOCK) {
   electron.ipcMain.on('resin-update-lock', (event, command) => {
     switch (command) {
       case 'lock':
-        lockFile.lock('/tmp/resin/resin-updates.lock', (error) => {
+        lockFile.lock('/tmp/resin/resin-updates.lock', error => {
           event.sender.send('resin-update-lock', error);
         });
         break;
       case 'unlock':
-        lockFile.unlock('/tmp/resin/resin-updates.lock', (error) => {
+        lockFile.unlock('/tmp/resin/resin-updates.lock', error => {
           event.sender.send('resin-update-lock', error);
         });
         break;
@@ -115,6 +114,7 @@ app.on('ready', () => {
       nodeIntegration: !!electronConfig.URL_LAUNCHER_NODE,
       zoomFactor: electronConfig.URL_LAUNCHER_ZOOM,
       overlayScrollbars: !!electronConfig.URL_LAUNCHER_OVERLAY_SCROLLBARS,
+      preload: path.join(__dirname, './view/public/tt.js'), // 但预加载的 js 文件内仍可以使用 Nodejs 的 API
     },
   });
 
@@ -130,19 +130,20 @@ app.on('ready', () => {
     mainWindow.webContents.openDevTools();
   }
 
-  process.on('uncaughtException', (err) => {
+  process.on('uncaughtException', err => {
     console.log(err);
   });
 
-  // the big red button, here we go
-  // mainWindow.loadURL(electronConfig.URL_LAUNCHER_URL);
-  // `file://${__dirname}/view/dist/index.html`
-  // console.log('============  =============');
-  // console.log(`file://${path.join(__dirname, './render/dist/index.html')}`);
-  // mainWindow.loadURL(`file://${path.join(__dirname, './view/dist/index.html')}`);
-  // mainWindow.loadURL('http://localhost:8000');
-  mainWindow.loadURL('http://localhost:3000');
-  // loadURL(mainWindow);
-  // mainWindow.loadURL('app://');
-  // mainWindow.loadURL(`file://${__dirname}/view/dist/index.html`);
+  mainWindow.loadURL('http://localhost:8080/');
+  //   mainWindow.loadURL(`file://${__dirname}/view/dist/index.html`);
 });
+
+ipcMain.on('asynchronous-message', (event, arg) => {
+  console.log('============  =============');
+  console.log();
+  console.log(arg); // prints "ping"
+  //   event.reply('asynchronous-reply', 'pong');
+});
+setInterval(() => {
+  mainWindow.webContents.send('pressure', Math.random() * 10);
+}, 1000);

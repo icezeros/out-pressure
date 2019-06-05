@@ -9,7 +9,8 @@ import {
   DEFAULT_FIXED_SIDEMENU,
   DEFAULT_FIXED_HEADER_HIDDEN,
   DEFAULT_CONTENT_WIDTH_TYPE,
-  DEFAULT_MULTI_TAB
+  DEFAULT_MULTI_TAB,
+  PRESSURE_SET_VALUE
 } from '@/store/mutation-types'
 
 const app = {
@@ -31,7 +32,7 @@ const app = {
       state.sidebar = type
       Vue.ls.set(SIDEBAR_TYPE, type)
     },
-    CLOSE_SIDEBAR: (state) => {
+    CLOSE_SIDEBAR: state => {
       Vue.ls.set(SIDEBAR_TYPE, true)
       state.sidebar = false
     },

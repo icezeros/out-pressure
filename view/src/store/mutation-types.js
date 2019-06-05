@@ -14,3 +14,5 @@ export const CONTENT_WIDTH_TYPE = {
   Fluid: 'Fluid',
   Fixed: 'Fixed'
 }
+
+export const PRESSURE_SET_VALUE = 'PRESSURE_SET_VALUE'

@@ -4,13 +4,13 @@ const moment = require('dayjs');
 
 class SerialPort {
   constructor({ baudRate = 9600, autoOpen = true, dataBits = 7, stopBits = 1 }) {
-    this.serialPort;
+    this.serialPort = null;
     this.baudRate = baudRate;
     this.autoOpen = autoOpen;
     this.dataBits = dataBits;
     this.stopBits = stopBits;
-    this.messageCb;
-    this.errCb;
+    this.messageCb = null;
+    this.errCb = null;
   }
 
   static async scanPort() {
@@ -24,42 +24,54 @@ class SerialPort {
     });
   }
 
-  openSerial() {
-    // this.serialPort = new SerialPort('/dev/tty.wchusbserial14410', {
-    this.serialPort = new SerialPort('/dev/tty.BeatsX-SPPServer', {
+  openSerial(messageCb) {
+    const that = this;
+    if (messageCb) {
+      that.messageCb = messageCb;
+    }
+    // that.serialPort = new SerialPort('/dev/tty.wchusbserial14410', {
+    that.serialPort = new SerialPortDriver('/dev/tty.wchusbserial14610', {
       // 波特率，可在设备管理器中对应端口的属性中查看
-      baudRate: this.baudRate,
-      autoOpen: this.autoOpen,
-      dataBits: this.dataBits,
-      stopBits: this.stopBits,
+      baudRate: that.baudRate,
+      autoOpen: that.autoOpen,
+      dataBits: that.dataBits,
+      stopBits: that.stopBits,
       // parity: parity,
+    });
+    that.serialPort.on('data', (data) => {
+      if (that.messageCb) {
+        that.messageCb({ time: moment(), data });
+      }
+    });
+    // 错误监听
+    that.serialPort.on('error', (error) => {
+      console.log(`error: ${error}`);
     });
   }
 
-  readData(dealData) {
-    console.log('============ this.serialPort =============');
-    console.log(this.serialPort);
-    // this.serialPort.on('data', function(data) {
-    //     dealData && dealData(data);
-    //     // console.log('============ 1 =============');
-    //     // // console.log(`data received: ${typeof data }`);
-    //     // const message = iconv.decode(data, 'ascii');
-    //     // console.log('============ message =============');
-    //     // console.log(moment());
-    //     // console.log(message);
+  //   readData(dealData) {
+  //     this.serialPort.on('data', (data) => {
+  //       const message = iconv.decode(data, 'ascii');
+  //       console.log('============ message =============');
+  //       console.log(
+  //         moment()
+  //           .format('YYYY-MM-DD hh:mm:ss SSS')
+  //           .toString(),
+  //       );
+  //       console.log(message.split(','));
 
-    //     // console.log();
-    //     // console.log();
-    //     // console.log();
-    //     // console.log();
-    //     // console.log();
-    //     // console.log();
-    // });
-    // //错误监听
-    // this.serialPort.on('error', function(error) {
-    //     console.log('error: ' + error);
-    // });
-  }
+  //       console.log();
+  //       console.log();
+  //       console.log();
+  //       console.log();
+  //       console.log();
+  //       console.log();
+  //     });
+  //     // 错误监听
+  //     this.serialPort.on('error', (error) => {
+  //       console.log(`error: ${error}`);
+  //     });
+  //   }
 }
 
 module.exports = SerialPort;

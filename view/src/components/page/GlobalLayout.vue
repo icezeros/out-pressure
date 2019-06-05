@@ -7,7 +7,7 @@
         :closable="false"
         :visible="collapsed"
         placement="left"
-        @close="() => this.collapsed = false"
+        @close="() => (this.collapsed = false)"
       >
         <side-menu
           :menus="menus"
@@ -34,7 +34,7 @@
         v-if="isMobile()"
         :wrapClassName="'drawer-sider ' + navTheme"
         placement="left"
-        @close="() => this.collapsed = false"
+        @close="() => (this.collapsed = false)"
         :closable="false"
         :visible="collapsed"
       >
@@ -65,14 +65,17 @@
 
       <!-- layout content -->
       <a-layout-content
-        :style="{ margin: $store.getters.multiTab ? '24px 24px 0' : '24px 24px 0', height: '100%', paddingTop: fixedHeader ? '64px' : '0' }"
+        :style="{
+          margin: $store.getters.multiTab ? '24px 24px 0' : '24px 24px 0',
+          height: '100%',
+          paddingTop: fixedHeader ? '64px' : '0'
+        }"
       >
         <slot></slot>
       </a-layout-content>
-
       <!-- layout footer -->
       <a-layout-footer style="padding: 0">
-        <global-footer/>
+        <global-footer />
       </a-layout-footer>
       <setting-drawer></setting-drawer>
     </a-layout>
@@ -101,7 +104,8 @@ export default {
   data() {
     return {
       collapsed: false,
-      menus: []
+      menus: [],
+      pressure: 100
     }
   },
   computed: {
@@ -125,6 +129,8 @@ export default {
     }
   },
   created() {
+    const { $store } = this
+
     this.menus = asyncRouterMap.find(item => item.path === '/').children
     // this.menus = this.mainMenu.find((item) => item.path === '/').children
     this.collapsed = !this.sidebarOpened
