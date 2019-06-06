@@ -3,7 +3,6 @@ import Vuex from 'vuex'
 
 import app from './modules/app'
 import user from './modules/user'
-import sensor from './modules/sensor'
 import permission from './modules/permission'
 import getters from './getters'
 
@@ -12,12 +11,17 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   modules: {
     app,
-    sensor,
     user,
     permission
   },
-  state: {},
-  mutations: {},
-  actions: {},
+  state: {
+
+  },
+  mutations: {
+
+  },
+  actions: {
+
+  },
   getters
 })

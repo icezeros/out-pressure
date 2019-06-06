@@ -6,7 +6,7 @@
           <a-menu
             :mode="device == 'mobile' ? 'horizontal' : 'inline'"
             :style="{ border: '0', width: device == 'mobile' ? '560px' : 'auto'}"
-            :defaultSelectedKeys="defaultSelectedKeys"
+            :selectedKeys="selectedKeys"
             type="inner"
             @openChange="onOpenChange"
           >
@@ -49,14 +49,13 @@
 </template>
 
 <script>
-import PageLayout from '@/components/page/PageLayout'
-import RouteView from '@/components/layouts/RouteView'
+import { PageView, RouteView } from '@/layouts'
 import { mixinDevice } from '@/utils/mixin.js'
 
 export default {
   components: {
     RouteView,
-    PageLayout
+    PageView
   },
   mixins: [mixinDevice],
   data () {
@@ -65,7 +64,7 @@ export default {
       mode: 'inline',
 
       openKeys: [],
-      defaultSelectedKeys: [],
+      selectedKeys: [],
 
       // cropper
       preview: {},
@@ -97,7 +96,12 @@ export default {
     },
     updateMenu () {
       const routes = this.$route.matched.concat()
-      this.defaultSelectedKeys = [ routes.pop().path ]
+      this.selectedKeys = [ routes.pop().path ]
+    }
+  },
+  watch: {
+    '$route' (val) {
+      this.updateMenu()
     }
   }
 }
