@@ -134,7 +134,7 @@ app.on('ready', () => {
     console.log(err);
   });
 
-  mainWindow.loadURL('http://localhost:8080/');
+  mainWindow.loadURL('http://localhost:8000/');
   //   mainWindow.loadURL(`file://${__dirname}/view/dist/index.html`);
 });
 
