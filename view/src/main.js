@@ -15,6 +15,12 @@ import bootstrap from './core/bootstrap'
 import './core/use'
 // import './permission' // permission control
 import './utils/filter' // global filter
+let ipcRenderer
+let electron
+if (window.require) {
+  electron = window.require('electron')
+  ipcRenderer = electron.ipcRenderer
+}
 
 function ipcMessage () {
   ipcRenderer.send('asynchronous-message', 'ping')
