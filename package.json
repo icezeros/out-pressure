@@ -1,50 +1,84 @@
 {
-  "name": "resin-electronjs",
-  "version": "1.0.0",
-  "description": "electronJS-based resin application",
-  "main": "main.js",
-  "scripts": {
-    "dev": "NODE_ENV=development electron .",
-    "lint": "eslint .",
-    "start": "NODE_ENV=production startx ./node_modules/electron/dist/electron .",
-    "local": "NODE_ENV=production electron .",
-    "pack": "electron-packager ./ --overwrite --platform=linux --arch=armv7l"
+  "name": "ice-electron",
+  "version": "0.0.1",
+  "description": "an example based on umijs + electron",
+  "main": "./dist/main/main.js",
+  "private": true,
+  "build": {
+    "files": [
+      "dist/",
+      "node_modules/",
+      "package.json"
+    ],
+    "mac": {
+      "category": "your.app.category.type"
+    },
+    "directories": {
+      "output": "release"
+    },
+    "appId": "umi-electron",
+    "asar": false
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/resin-io/resin-electronjs.git"
+  "scripts": {
+    "start:dev": "concurrently \"npm run start:renderer\" \"npm run start:main\"",
+    "start": "npm run build-main-dev && electron ./dist/main/main.js",
+    "start:main": "electron-webpack dev",
+    "start:renderer": "cross-env APP_ROOT=src/renderer umi dev",
+    "build-main-prod": "cross-env NODE_ENV=production webpack --config ./build/webpack.main.prod.config.js",
+    "build-main-dev": "cross-env NODE_ENV=development webpack --config ./build/webpack.main.config.js",
+    "build:renderer": "cross-env APP_ROOT=src/renderer umi build",
+    "watch": "tsc -w",
+    "lint": "tslint -c tslint.json -p tsconfig.json",
+    "debug:main": "electron --inspect=5858 -w ./dist/main/main.js",
+    "pack": "npm run build:renderer && npm run build-main-prod && electron-builder --dir",
+    "dist": "electron-builder",
+    "prettier": "prettier --list-different \"./**/*.{ts,tsx,js,jsx,less}\""
   },
   "keywords": [
-    "resin",
-    "io",
-    "electron",
-    "js"
+    "Electron",
+    "umi",
+    "quick",
+    "start",
+    "tutorial",
+    "demo"
   ],
-  "dependencies": {
-    "antd": "^3.12.3",
-    "dayjs": "^1.8.10",
-    "electron": "~2.0.16",
-    "electron-packager": "^13.0.1",
-    "electron-rebuild": "^1.8.2",
-    "electron-serve": "^0.2.0",
-    "iconv-lite": "^0.4.24",
-    "lockfile": "^1.0.4",
-    "nedb": "^1.8.0",
-    "serialport": "^7.1.4"
-  },
-  "author": "Carlo Maria Curinga",
-  "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/resin-io/resin-electronjs/issues"
-  },
-  "homepage": "https://github.com/resin-io/resin-electronjs#readme",
-  "jshintConfig": {
-    "esversion": 6,
-    "strict": true
+  "author": {
+    "name": "icezeros",
+    "email": "icezeros@163.com"
   },
   "devDependencies": {
-    "eslint": "^3.14.1",
-    "eslint-config-airbnb-base": "^11.0.1",
-    "eslint-plugin-import": "^2.2.0"
+    "concurrently": "^4.1.0",
+    "cross-env": "^5.2.0",
+    "dva-logger": "^1.0.0",
+    "electron": "^5.0.1",
+    "electron-builder": "^20.39.0",
+    "electron-debug": "^2.2.0",
+    "electron-webpack": "^2.6.2",
+    "prettier": "1.17.0",
+    "uglifyjs-webpack-plugin": "^2.1.2",
+    "umi": "^2.6.17",
+    "umi-plugin-react": "^1.7.6",
+    "webpack": "4.31.0",
+    "webpack-cli": "^3.3.2",
+    "webpack-merge": "^4.2.1"
+  },
+  "dependencies": {
+    "antd": "^3.19.6",
+    "electron-is": "^3.0.0",
+    "electron-log": "^3.0.6",
+    "electron-store": "^3.3.0",
+    "getmac": "^1.4.6",
+    "http-proxy": "^1.17.0",
+    "lodash": "^4.17.11",
+    "react": "^16.8.6",
+    "slash": "^3.0.0"
+  },
+  "electronWebpack": {
+    "main": {
+      "sourceDirectory": "src/main"
+    },
+    "renderer": {
+      "sourceDirectory": null
+    }
   }
 }

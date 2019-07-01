@@ -1,102 +1,114 @@
-# resin-electronjs
+# umi-electron-javecript
 
-a boilerplate for developing kiosks, digital signage or other human-machine interaction projects based on [ElectronJS](http://electron.atom.io/) and [resin.io](http://resin.io)
+### 一个基于 umijs + electron + javecript 的模板
 
-## Warning regarding armv6
-This project does not currently support the armv6 architecture (ie Raspberry Pi 0 and 1) due to electron limitations. If the issue is fixed on the electron side, we will include it in this project. More on this [here](https://github.com/electron/electron/issues/4677)
+[![Umi](https://img.souche.com/f2e/a92fc3dfdb4918578861c42bbfcfaf7f.png)](https://umijs.org/)
+[![Webpack](https://img.souche.com/f2e/cdc96229f3f9b7068a9b13f7658a9b0e.png)](https://webpack.js.org/)
+[![Electron](https://img.souche.com/f2e/4f18b23a82d106ce023cdaf17c6dfd51.png)](https://electronjs.org/)
 
-## Getting started
+## 主要特性
 
-- Sign up on [resin.io](https://dashboard.resin.io/signup)
-- go throught the [getting started guide](http://docs.resin.io/raspberrypi/nodejs/getting-started/) and create a new application
-- clone this repository to your local workspace
-- add the _resin remote_ to your local workspace using the useful shortcut in the dashboard UI ![remoteadd](https://raw.githubusercontent.com/resin-io-playground/boombeastic/master/docs/gitresinremote.png)
-- `git push resin master`
-- see the magic happening, your device is getting updated Over-The-Air!
+- 支持整个应用的热重载
 
-## Configure via [environment variables](https://docs.resin.io/management/env-vars/)
-Variable Name | Value | Description | Device-specific
------------- | ------------- | ------------- | -------------
-**`RESIN_HOST_CONFIG_gpu_mem`** | a value from `64` to `160` | the amount of RAM dedicated to the GPU | Raspberry Pi (all revs)
+## 项目目录
 
-Apply the above settings in the "Fleet Configuration" panel (if applying it for the all devices withing your application), or "Device Configuration" panel (if applying it for a single device).
-
-
-### WHY THIS TEMPLATE
-
-Achieving kinda-smooth desktop application display on devices like the raspberrypi is hard. This project aims to provide a quickstart template.
-
-### URL LAUNCHER config via ENV VARS
-*__!!! Please note that since `0.1.0` the `bool`-based env vars dropped `true` / `false` strings in favour of `0` / `1` ones. !!!__*
-
-simply set these [environment varables](http://docs.resin.io/#/pages/management/env-vars.md) in your app via "Environment Variables" panel in the resin dashboard to configure the behaviour of your devices.
-*__Please note that the `bool` type definition in the table is meant to accept to either `0` or `1` values.__*
-
-* **`URL_LAUNCHER_URL`** *string* - the URL to be loaded. use `file:////usr/src/app/data/index.html` to load a local electronJS (or any website) app - *defaults to* `file:////usr/src/app/data/index.html`
-* **`URL_LAUNCHER_NODE`** *bool* (converted from *string*) - whether or not enable nodejs - *defaults to* `0`
-* **`URL_LAUNCHER_KIOSK`** *bool* (converted from *string*) - whether or not enter KIOSK mode - *defaults to* `1`
-* **`URL_LAUNCHER_TITLE`** *string* - the title of the window. Seen only with `URL_LAUNCHER_FRAME`=`true` - *defaults to* `RESIN.IO`
-* **`URL_LAUNCHER_FRAME`** *bool* (converted from *string*) - set to "true" to display the window frame. Seen only with `URL_LAUNCHER_KIOSK`=`false` - *defaults to*  `0`
-* **`URL_LAUNCHER_CONSOLE`** *bool* (converted from *string*) - set to "true" to display the debug console -  *defaults to*  `0`
-* **`URL_LAUNCHER_WIDTH`**  *int* (converted from *string*) -  - *defaults to* `1920`
-* **`URL_LAUNCHER_HEIGHT`**  *int* (converted from *string*) -  - *defaults to* `1080`
-* **`URL_LAUNCHER_TOUCH`** *bool* (converted from *string*) - enables touch events if your device supports them  - *defaults to* `0`
-* **`URL_LAUNCHER_TOUCH_SIMULATE`** *bool* (converted from *string*) - simulates touch events - might be useful for touchscreen with partial driver support - be aware this could be a performance hog  - *defaults to* `0`
-* **`URL_LAUNCHER_ZOOM`** *float* (converted from *string*) - The default zoom factor of the page, 3.0 represents 300%  - *defaults to* `1.0`
-* **`URL_LAUNCHER_OVERLAY_SCROLLBARS`** *bool* (converted from *string*) - enables overlay scrollbars  - *defaults to* `0`
-* **`TFT`** *bool* (converted from *string*) - sets the target display to TFT screen like the [piTFT](https://www.adafruit.com/product/1601) but still requires you to set the proper device tree overlay configuration for it  - *defaults to* `0`
-* **`TFT_ROTATE`**  *int* (converted from *string*) - accepted values: 0,90,180,270 - *defaults to* `0`
-* **`ELECTRON_ENABLE_HW_ACCELERATION`**  *bool* (converted from *string*) - enable hardware acceleration - *defaults to* `0`
-* **`ELECTRON_RESIN_UPDATE_LOCK`**  *bool* (converted from *string*) - Enable supervisor update locking (see [Update Locking](#update-locking))
-* **`ELECTRON_APP_DATA_DIR`**  *string* - Override the `appData` directory (see [Electron API Documentation: app](https://electronjs.org/docs/api/app#appgetpathname))
-* **`ELECTRON_USER_DATA_DIR`**  *string* - Override the `userData` directory (see [Electron API Documentation: app](https://electronjs.org/docs/api/app#appgetpathname))
-
-### Update Locking
-
-**NOTE:** Take care to only listen for a response *once*, and avoid sending
-multiple requests before the response arrived.
-
-```js
-const {ipcRenderer} = require('electron')
+```
+.
+├── build
+│   └── ...                         // webpack 配置文件
+├── dist
+│   └── ...                         // 打包文件夹
+├── src                             // 源代码文件
+│   ├── main                        // 主进程代码
+│   │   ├── Application.js          // application 类
+│   │   ├── config
+│   │   │   └── ...                 // 配置文件
+│   │   ├── event
+│   │   │   └── ...                 // IPC通信 监听事件
+│   │   ├── index.js                // 入口文件
+│   │   ├── logger
+│   │   │   └── index.js            // 日志封装
+│   │   ├── pages
+│   │   │   ├── window.html         // 子窗口 html 模板文件
+│   │   │   └── ...
+│   │   ├── system
+│   │   │   ├── crash.js
+│   │   │   ├── tray.js
+│   │   │   └── ...                 // 系统模块
+│   │   ├── utils
+│   │   │   ├── deviceid.js
+│   │   │   ├── download.js
+│   │   │   ├── path.js
+│   │   │   └── ...                 // 工具类
+│   │   └── window
+│   │       └── index.js            // 渲染窗口封装
+│   └── renderer                    // 渲染进程代码
+│       ├── app.js
+│       ├── assets                  // 静态文件
+│       │   └── yay.jpg
+│       ├── config                  // 配置
+│       │   ├── config.js
+│       │   └── ...
+│       ├── global.js
+│       ├── layouts                 // layout 模板
+│       │   ├── index.css
+│       │   ├── index.js
+│       │   └── ...
+│       ├── models
+│       │   ├── global.js
+│       │   └── ...
+│       └── pages
+│           └── ...
+└── package.json
 ```
 
-#### Acquiring the Lock
+## 安装
 
-```js
-// Listen for a response
-ipcRenderer.once('resin-update-lock', (event, error) => {
-  if (error) { ... }
-})
+然后通过 yarn 下载依赖
 
-// Send the 'lock' command to acquire the lock
-ipcRenderer.send('resin-update-lock', 'lock')
+```javascript
+  $ yarn
 ```
 
-#### Releasing the Lock
+## 开发
 
-```js
-// Listen for a response
-ipcRenderer.once('resin-update-lock', (event, error) => {
-  if (error) { ... }
-})
+首先通过以下命令启动渲染进程(默认端口：8000)
 
-// Send the 'unlock' command to release the lock
-ipcRenderer.send('resin-update-lock', 'unlock')
+### 一条命令启动
+
+```javascript
+  $ yarn start:dev
 ```
 
-#### Checking the Lock
+### 分开启动
 
-```js
-// Listen for a response
-ipcRenderer.once('resin-update-lock', (event, error, isLocked) => {
-  console.log('Locked:', error || isLocked)
-})
+首先通过以下命令启动渲染进程(默认端口：8000)
 
-// Send the 'check' command to check on the state of the lock
-ipcRenderer.send('resin-update-lock', 'check')
+```javascript
+  $ yarn start:renderer
 ```
 
-### Related
+然后启动主进程
 
-- [resin-electronjs vue boilerplate](https://github.com/imomaliev/resin-electron-vue) by [@imomaliev](https://github.com/imomaliev)
-- [resin-electronjs react boilerplate](https://github.com/resin-io-playground/resin-electronjs-react) by [@craig-mulligan](https://github.com/craig-mulligan)
+```javascript
+  $ yarn start:main
+```
+
+## 打包
+
+```javascript
+  $ npm run pack
+```
+
+如果想把代码打包成一个 dmg 文件或者 zip 文件，可以执行以下命令
+
+```javascript
+  $ npm run dist
+```
+
+## 致谢
+
+- [@williamnie](https://github.com/williamnie)提供的模板([umi-electron](https://github.com/williamnie/umi-electron))
+- [@agalwood](https://github.com/agalwood/Motrix)提供的项目([Motrix](https://github.com/agalwood/Motrix))
+- [@ConardLi](https://github.com/ConardLi)提供的模板([electron-react](https://github.com/ConardLi/electron-react))，本项目是根据这些项目修改而来。
+- [Electron](https://github.com/electron/electron), [Umi](https://github.com/umijs/umi), [Dva](https://github.com/dvajs/dva), [Antd](https://github.com/ant-design/ant-design)等框架的开发者们。
