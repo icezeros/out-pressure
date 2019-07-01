@@ -1,62 +1,49 @@
 <template>
   <a-card :bordered="true">
-    <!-- <component @onEdit="handleEdit" @onGoBack="handleGoBack" :record="record" :is="currentComponet"></component> -->
-    <a-row>
-      <a-col :span="12">col-12</a-col>
-      <a-col :span="12">col-12</a-col>
-    </a-row>
-    <a-row>
-      <a-col :span="12">col-12</a-col>
-      <a-col :span="12">
-        <a-row>
-          col-12
-        </a-row>
-        <a-row>
-          col-12
-        </a-row>
-      </a-col>
-    </a-row>
-    <p>sdfs</p>
+    <chart ref="chart1" :options="orgOptions" :autoresize="true"></chart>
   </a-card>
 </template>
 
 <script>
-import ATextarea from 'ant-design-vue/es/input/TextArea'
-import AInput from 'ant-design-vue/es/input/Input'
-// 动态切换组件
-import List from '@/views/list/table/List'
-import Edit from '@/views/list/table/Edit'
-
 export default {
-  name: 'TableListWrapper',
-  components: {
-    AInput,
-    ATextarea,
-    List,
-    Edit
-  },
+  name: 'HelloWorld',
   data() {
     return {
-      currentComponet: 'List',
-      record: ''
+      orgOptions: {}
     }
   },
-  created() {},
-  methods: {
-    handleEdit(record) {
-      this.record = record || ''
-      this.currentComponet = 'Edit'
-      console.log(record)
-    },
-    handleGoBack() {
-      this.record = ''
-      this.currentComponet = 'List'
-    }
-  },
-  watch: {
-    '$route.path'() {
-      this.record = ''
-      this.currentComponet = 'List'
+  mounted() {
+    this.orgOptions = {
+      height: '100px',
+      xAxis: {
+        type: 'category',
+        data: [
+          'Mon',
+          'Tue',
+          'Wed',
+          'Thu',
+          'Fri',
+          'Sat',
+          'Sun',
+          'Sat1',
+          'Sun2',
+          'Sat3',
+          'Sun4',
+          'Sun25',
+          'Sat36',
+          'Sun47'
+        ]
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: [
+        {
+          data: [820, 932, 901, 934, 1290, 1330, 1320, 1290, 1330, 1320, 1290, 1330, 1320],
+          type: 'line',
+          smooth: true
+        }
+      ]
     }
   }
 }

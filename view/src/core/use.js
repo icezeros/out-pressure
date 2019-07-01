@@ -14,7 +14,9 @@ import PermissionHelper from '@/utils/helper/permission'
 
 // import '@/components/use'
 import './directives/action'
-
+import ECharts from 'vue-echarts'
+import 'echarts/lib/chart/line'
+import 'echarts/lib/component/polar'
 // import VueElectron from 'vue-electron'
 
 // import { ipcRenderer } from 'electron'
@@ -22,6 +24,7 @@ import './directives/action'
 
 VueClipboard.config.autoSetContainer = true
 // Vue.use(VueElectron)
+Vue.component('chart', ECharts)
 
 Vue.use(Antd)
 Vue.use(Viser)
