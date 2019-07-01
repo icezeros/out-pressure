@@ -68,6 +68,9 @@ class Nav extends Component {
           <Item key="Antd">
             <Link to="/Antd">Antd</Link>
           </Item>
+          <Item key="Chart">
+            <Link to="/Chart">Chart</Link>
+          </Item>
         </Menu>
       </div>
     );
