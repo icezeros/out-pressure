@@ -32,7 +32,8 @@
     "debug:main": "electron --inspect=5858 -w ./dist/main/main.js",
     "pack": "npm run build:renderer && npm run build-main-prod && electron-builder --dir",
     "dist": "electron-builder",
-    "prettier": "prettier --list-different \"./**/*.{ts,tsx,js,jsx,less}\""
+    "prettier": "prettier --list-different \"./**/*.{ts,tsx,js,jsx,less}\"",
+    "pi": "electron-packager ./ --overwrite --platform=linux --arch=armv7l"
   },
   "keywords": [
     "Electron",
@@ -53,6 +54,7 @@
     "electron": "^5.0.1",
     "electron-builder": "^20.39.0",
     "electron-debug": "^2.2.0",
+    "electron-packager": "^14.0.1",
     "electron-webpack": "^2.6.2",
     "prettier": "1.17.0",
     "uglifyjs-webpack-plugin": "^2.1.2",
