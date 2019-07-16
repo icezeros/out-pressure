@@ -5,6 +5,8 @@ import logger from './logger';
 import Application from './Application';
 import handleQuit from './event/quit';
 import handleMessage from './event';
+import Db from './service/nedb';
+
 if (process.env.NODE_ENV !== 'development') {
   global.__static = require('path')
     .join(__dirname, '/static')
@@ -71,4 +73,13 @@ function handleAppWillQuit() {
   });
 }
 
-makeSingleInstance(init);
+// makeSingleInstance(init);
+init();
+// const test = new Db();
+// const fileName = `${Math.random() * 10}`;
+// // const fileName = `5555`;
+
+// test.addCollection(fileName);
+// test.collections.get(fileName).insert({ a: 1, b: 4 });
+// console.log('============ test =============');
+// console.log(test);
