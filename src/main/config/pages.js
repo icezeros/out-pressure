@@ -19,7 +19,7 @@ export default {
     url: is.dev()
       ? `http://localhost:8000/`
       : url.format({
-          pathname: path.join(__dirname, './dist/renderer/index.html'),
+          pathname: path.join(__dirname, '../renderer/index.html'),
           protocol: 'file:',
           slashes: true,
         }),
