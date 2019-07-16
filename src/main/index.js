@@ -5,7 +5,7 @@ import logger from './logger';
 import Application from './Application';
 import handleQuit from './event/quit';
 import handleMessage from './event';
-import Db from './service/nedb';
+// import Db from './service/nedb';
 
 if (process.env.NODE_ENV !== 'development') {
   global.__static = require('path')
