@@ -1,4 +1,6 @@
 import is from 'electron-is';
+import url from 'url';
+import path from 'path';
 
 export default {
   main: {
@@ -8,7 +10,7 @@ export default {
       height: 768,
       minWidth: 840,
       minHeight: 420,
-      fullscreen: true,
+      //   fullscreen: true,
       titleBarStyle: 'customButtonsOnHover',
       // backgroundColor: '#FFFFFF',
       //   transparent: !is.windows(),
