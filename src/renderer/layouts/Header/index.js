@@ -1,13 +1,25 @@
 import React, { Component } from 'react';
-import { Layout } from 'antd';
+import { Layout, Row, Col } from 'antd';
 import './index.css';
+import { connect } from 'dva';
 
 const { Header } = Layout;
 
+@connect(({ sensor }) => ({
+  sensor,
+  currentPressure: sensor.currentPressure,
+}))
 class HeaderComponent extends Component {
   render() {
+    const { currentPressure = 0 } = this.props;
     return (
-      <Header className='header' ></Header>
+      <Header className="header">
+        <Row>
+          <Col span={8}>col-12</Col>
+          <Col span={8}>压力: {currentPressure}</Col>
+          <Col span={8}>col-6</Col>
+        </Row>
+      </Header>
     );
   }
 }

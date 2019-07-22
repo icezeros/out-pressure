@@ -34,27 +34,7 @@ export default class Application extends EventEmitter {
 
   init() {
     this.initWindowManager();
-    // this.handelAppReady();
-    // handleQuit();
-    // handleMessage();
   }
-  //   handelAppReady() {
-  //     app.on('ready', () => {
-  //       this.showPage('main');
-  //       global.mainId = this.windowManager.getWindow('main').id;
-  //       //   global.application = new Application();
-  //       //   const { openedAtLogin } = this;
-  //       //   global.application.start('index', {
-  //       //     openedAtLogin,
-  //       //   });
-
-  //       //   global.application.on('ready', () => {
-  //       //     this.sendUrlToApplication();
-
-  //       //     this.sendFileToApplication();
-  //       //   });
-  //     });
-  //   }
   initWindowManager() {
     this.windowManager.on('window-resized', data => {
       this.storeWindowState(data);
@@ -127,71 +107,4 @@ export default class Application extends EventEmitter {
     // this.energyManager.stopPowerSaveBlocker()
     // this.trayManager.destroy()
   }
-
-  makeSingleInstance(cb) {
-    if (is.mas()) {
-      cb();
-      return;
-    }
-    const gotSingleLock = app.requestSingleInstanceLock();
-    if (!gotSingleLock) {
-      app.quit();
-    } else {
-      app.on('second-instance', (event, argv, workingDirectory) => {
-        logger.warn('second-instance====>', argv, workingDirectory);
-        global.mainWindow.showWindow();
-        if (!is.macOS() && argv.length > 1) {
-          this.handleAppLaunchArgv(argv);
-        }
-      });
-      cb();
-    }
-  }
-  //   init2() {
-  //     this.handleAppEvents()
-  //       .then(() => handleQuit())
-  //       .then(() => onCrash())
-  //       .then(() => handleMessage());
-  //     //   .then(() => createTray());
-  //   }
-  //   stop() {}
-
-  //   async handleAppEvents() {
-  //     return new Promise((resolve, reject) => {
-  //       app.on('ready', () => {
-  //         const options = {
-  //           window: {
-  //             title: 'test',
-  //             show: false,
-  //             width: 1024,
-  //             height: 768,
-  //             webPreferences: {
-  //               nodeIntegration: true,
-  //               preload: path.join(__dirname, './preload.js'), // 但预加载的 js 文件内仍可以使用 Nodejs 的 API
-  //             },
-  //           },
-  //         };
-  //         if (process.env.NODE_ENV === 'development') {
-  //           options.url = 'http://localhost:8000/';
-  //         } else {
-  //           options.url = url.format({
-  //             pathname: path.join(__dirname, './dist/renderer/index.html'),
-  //             protocol: 'file:',
-  //             slashes: true,
-  //           });
-  //         }
-  //         const mainWindow = new Window(options);
-  //         mainWindow.showWindow();
-  //         mainWindow.on('ready', () => {
-  //           this.sendUrlToApplication();
-  //           this.sendFileToApplication();
-  //         });
-  //         global.mainWindow = mainWindow;
-  //         global.mainId = mainWindow.window.id;
-  //         this.mainWindow = mainWindow;
-
-  //         return resolve(mainWindow);
-  //       });
-  //     });
-  //   }
 }

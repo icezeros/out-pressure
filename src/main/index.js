@@ -41,26 +41,30 @@ function makeSingleInstance(callback) {
   }
 }
 
-function init() {
-  handelAppReady();
+async function init() {
+  await handelAppReady();
+  handleQuit();
+  handleMessage();
 }
+
 function handelAppReady() {
-  app.on('ready', () => {
-    application.showPage('main');
+  return new Promise((resolve, reject) => {
+    app.on('ready', () => {
+      application.showPage('main');
 
-    global.application.on('ready', () => {
-      //   this.sendUrlToApplication();
-      //   this.sendFileToApplication();
+      global.application.on('ready', () => {
+        //   this.sendUrlToApplication();
+        //   this.sendFileToApplication();
+      });
+      return resolve();
     });
-    handleQuit();
-    handleMessage();
-  });
 
-  app.on('activate', () => {
-    if (global.application) {
-      logger.info('[Motrix] activate');
-      global.application.showPage('index');
-    }
+    // app.on('activate', () => {
+    //   if (global.application) {
+    //     logger.info('[Motrix] activate');
+    //     global.application.showPage('index');
+    //   }
+    // });
   });
 }
 

@@ -28,5 +28,9 @@ body {
 }
 
 :global .bodyContainer2 {
-  padding-top: 60px;
+  /* background: #363d45; */
+  background: #787b7e;
+  padding: 20px;
+  padding-top: 86px;
 }
+/* style={{ background: '#363d45', padding: '30px' } */

@@ -1,5 +1,5 @@
 {
-  "name": "ice-electron",
+  "name": "out-pressure",
   "version": "0.0.1",
   "description": "an example based on umijs + electron",
   "main": "./dist/main/main.js",
@@ -11,12 +11,13 @@
       "package.json"
     ],
     "mac": {
-      "category": "your.app.category.type"
+      "category": "your.app.category.out-pressure"
     },
+    "linux": {},
     "directories": {
       "output": "release"
     },
-    "appId": "umi-electron",
+    "appId": "out-pressure",
     "asar": false
   },
   "scripts": {
@@ -33,7 +34,7 @@
     "pack": "npm run build:renderer && npm run build-main-prod && electron-builder --dir",
     "dist": "electron-builder",
     "prettier": "prettier --list-different \"./**/*.{ts,tsx,js,jsx,less}\"",
-    "pi": "electron-packager ./ --overwrite --platform=linux --arch=armv7l"
+    "pi": "electron-packager ./dist out-pressure --overwrite --platform=linux --arch=armv7l"
   },
   "keywords": [
     "Electron",
@@ -65,6 +66,7 @@
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
+    "@material-ui/core": "^4.2.1",
     "@types/nedb": "^1.8.8",
     "antd": "^3.19.6",
     "bizcharts": "^3.5.4",
@@ -74,7 +76,8 @@
     "fs-extra": "^8.1.0",
     "getmac": "^1.4.6",
     "http-proxy": "^1.17.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.14",
+    "material-ui": "^0.20.2",
     "nedb": "^1.8.0",
     "react": "^16.8.6",
     "slash": "^3.0.0"

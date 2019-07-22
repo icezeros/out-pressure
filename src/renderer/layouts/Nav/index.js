@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Layout, Menu, Row } from 'antd';
+import { Layout, Menu, Row, Icon } from 'antd';
 import Link from 'umi/link';
 // import icon from '$public/image/icon.png';
 import './index.css';
@@ -10,6 +10,8 @@ const { Item, SubMenu } = Menu;
 class Nav extends Component {
   constructor(props) {
     super(props);
+    console.log('============ location.hash =============');
+    console.log(location.hash);
     const hash = location.hash.split('/')[1];
     this.state = { current: hash ? hash : 'Home' };
   }
@@ -27,7 +29,7 @@ class Nav extends Component {
       >
         <div className="iconContainer">
           {/* <img src={icon} className="icon" /> */}
-          <span className="titleText">icezeros</span>
+          <span className="titleText">压力测试仪</span>
         </div>
         <Menu
           defaultSelectedKeys={['1']}
@@ -39,10 +41,25 @@ class Nav extends Component {
           onClick={this.handleClick}
         >
           <Item key="Home">
-            <Link to="/">主页</Link>
+            <Link to="/Home">
+              <Icon type="dashboard" />
+              <Icon type="dashboard" theme="filled" />
+              <span>仪表盘</span>
+            </Link>
           </Item>
-          <Item key="Window">
-            <Link to="/window">窗口</Link>
+
+          <Item key="History">
+            <Link to="/History">
+              <Icon type="history" />
+              <Icon type="database" theme="filled" />
+              <span>历史数据</span>
+            </Link>
+          </Item>
+          <Item key="Chart">
+            <Link to="/Chart">Chart</Link>
+          </Item>
+          {/* <Item key="Window">
+            <Link to="/Window">窗口</Link>
           </Item>
           <Item key="IPC">
             <Link to="/IPC">进程通信</Link>
@@ -70,7 +87,7 @@ class Nav extends Component {
           </Item>
           <Item key="Chart">
             <Link to="/Chart">Chart</Link>
-          </Item>
+          </Item> */}
         </Menu>
       </div>
     );

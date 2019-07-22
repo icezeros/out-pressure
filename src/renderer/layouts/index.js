@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Layout, LocaleProvider } from 'antd';
 import { connect } from 'dva';
+import Card from '@material-ui/core/Card';
 import 'antd/dist/antd.less';
 import zhCN from 'antd/lib/locale-provider/zh_CN';
 import Header from './Header';
@@ -17,16 +18,26 @@ const { Content } = Layout;
 //   electron = window.require('electron');
 //   ipcRenderer = electron.ipcRenderer;
 // }
-
+@connect(({}) => ({}))
 export default class App extends Component {
   componentDidMount() {
     // ipcRenderer.send('window-inited', {
     //   userAgent: navigator.userAgent,
     // });
+    console.log('============ 123454321 =============');
+    console.log(123454321);
+    setInterval(() => {
+      this.props.dispatch({
+        type: 'sensor/updatePressure',
+        payload: {
+          pressure: Math.random(),
+        },
+      });
+    }, 5000);
   }
 
   render() {
-    const { children, publicData, location } = this.props;
+    const { children, location } = this.props;
 
     return (
       <LocaleProvider locale={zhCN}>
