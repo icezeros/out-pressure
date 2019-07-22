@@ -6,6 +6,7 @@ import Card from '@material-ui/core/Card';
 import Paper from '@material-ui/core/Paper';
 
 import Button from '@material-ui/core/Button';
+import Box from '@material-ui/core/Box';
 
 import styles from './index.css';
 console.log('============ CurvedChart =============');
@@ -23,7 +24,7 @@ export default class Home extends PureComponent {
   render() {
     const { currentPressure } = this.props;
     console.log('============ currentPressure =============');
-    console.log(currentPressure);
+    console.log();
     return (
       <div>
         <Row>
@@ -48,7 +49,12 @@ export default class Home extends PureComponent {
               {/* <Button type="primary" size="large">
                 开始
               </Button> */}
-              <Button variant="contained" color="secondary" width="300">
+
+              <Button
+                variant="contained"
+                color="secondary"
+                style={{ height: 100 }}
+              >
                 开始测量
               </Button>
             </Paper>
@@ -64,9 +70,7 @@ export default class Home extends PureComponent {
                 压力置零
               </Button>
               <Divider>压力</Divider>
-              <p>压力:</p>
-
-              {currentPressure}
+              <p style={{ size: 66 }}>{currentPressure}</p>
             </Paper>
           </Col>
           <Col span={8}>
