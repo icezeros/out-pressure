@@ -34,7 +34,7 @@
     "pack": "npm run build:renderer && npm run build-main-prod && electron-builder --dir",
     "dist": "electron-builder",
     "prettier": "prettier --list-different \"./**/*.{ts,tsx,js,jsx,less}\"",
-    "pi": "electron-packager ./dist out-pressure --overwrite --platform=linux --arch=armv7l"
+    "pi": "npm run build:renderer && npm run build-main-prod && electron-packager ./dist out-pressure --overwrite --platform=linux --arch=armv7l"
   },
   "keywords": [
     "Electron",
