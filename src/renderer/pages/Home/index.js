@@ -51,9 +51,10 @@ export default class Home extends PureComponent {
               </Button> */}
 
               <Button
+                fullWidth
                 variant="contained"
-                color="secondary"
-                style={{ height: 100 }}
+                color="primary"
+                style={{ height: 150 }}
               >
                 开始测量
               </Button>
