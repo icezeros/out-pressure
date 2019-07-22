@@ -34,7 +34,7 @@ export default class Home extends PureComponent {
             bordered={true}
             style={{ height: 400, padding: 0 }}
           >
-            <CurvedChart />
+            {/* <CurvedChart /> */}
           </Paper>
         </Row>
 
