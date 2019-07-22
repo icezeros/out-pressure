@@ -12,17 +12,17 @@ import styles from './index.css';
 console.log('============ CurvedChart =============');
 console.log(CurvedChart);
 
-@connect(({ sensor }) => ({
-  sensor,
-  currentPressure: sensor.currentPressure,
-}))
+// @connect(({ sensor }) => ({
+//   sensor,
+//   currentPressure: sensor.currentPressure,
+// }))
 export default class Home extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {};
   }
   render() {
-    const { currentPressure } = this.props;
+    const {} = this.props;
     console.log('============ currentPressure =============');
     console.log();
     return (
@@ -71,7 +71,7 @@ export default class Home extends PureComponent {
                 压力置零
               </Button>
               <Divider>压力</Divider>
-              <p style={{ size: 66 }}>{currentPressure}</p>
+              <p style={{ size: 66 }}>{}</p>
             </Paper>
           </Col>
           <Col span={8}>
@@ -85,7 +85,6 @@ export default class Home extends PureComponent {
                 位移置零
               </Button>
               <Divider>位移</Divider>
-              <p>位移:</p>
             </Paper>
           </Col>
         </Row>
