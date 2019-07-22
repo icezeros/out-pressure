@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
-import { Row, Col /* Button */ /* Card */ } from 'antd';
+import { connect } from 'dva';
+import { Row, Divider, Col /* Button */ /* Card */ } from 'antd';
 import CurvedChart from '../../components/Chart';
 import Card from '@material-ui/core/Card';
 import Paper from '@material-ui/core/Paper';
@@ -9,12 +10,20 @@ import Button from '@material-ui/core/Button';
 import styles from './index.css';
 console.log('============ CurvedChart =============');
 console.log(CurvedChart);
+
+@connect(({ sensor }) => ({
+  sensor,
+  currentPressure: sensor.currentPressure,
+}))
 export default class Home extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {};
   }
   render() {
+    const { currentPressure } = this.props;
+    console.log('============ currentPressure =============');
+    console.log(currentPressure);
     return (
       <div>
         <Row>
@@ -34,13 +43,13 @@ export default class Home extends PureComponent {
               elevation={20}
               raised={true}
               bordered={true}
-              style={{ height: 100, padding: 20 }}
+              style={{ height: 200, padding: 20 }}
             >
               {/* <Button type="primary" size="large">
                 开始
               </Button> */}
-              <Button variant="contained" color="primary">
-                开始
+              <Button variant="contained" color="secondary">
+                开始测量
               </Button>
             </Paper>
           </Col>
@@ -49,9 +58,15 @@ export default class Home extends PureComponent {
               elevation={20}
               raised={true}
               title="压力"
-              style={{ height: 100, padding: 20 }}
+              style={{ height: 200, padding: 20 }}
             >
-              压力:
+              <Button variant="contained" fullWidth color="primary">
+                压力置零
+              </Button>
+              <Divider />
+              <p>压力:</p>
+
+              {currentPressure}
             </Paper>
           </Col>
           <Col span={8}>
@@ -59,9 +74,13 @@ export default class Home extends PureComponent {
               elevation={20}
               raised={true}
               title="位移"
-              style={{ height: 100, padding: 20 }}
+              style={{ height: 200, padding: 20 }}
             >
-              位移:
+              <Button variant="contained" fullWidth color="primary">
+                位移置零
+              </Button>
+              <Divider />
+              <p>位移:</p>
             </Paper>
           </Col>
         </Row>

@@ -33,7 +33,7 @@ export default class App extends Component {
           pressure: Math.random(),
         },
       });
-    }, 5000);
+    }, 1000);
   }
 
   render() {
