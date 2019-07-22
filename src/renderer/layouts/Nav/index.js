@@ -55,6 +55,9 @@ class Nav extends Component {
               <span>历史数据</span>
             </Link>
           </Item>
+          <Item key="Demo">
+            <Link to="/Demo">Demo</Link>
+          </Item>
           <Item key="Chart">
             <Link to="/Chart">Chart</Link>
           </Item>
