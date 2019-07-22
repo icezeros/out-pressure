@@ -29,7 +29,7 @@ class Nav extends Component {
       >
         <div className="iconContainer">
           {/* <img src={icon} className="icon" /> */}
-          <span className="titleText">压力测试仪</span>
+          <span className="titleText">XXXXXX</span>
         </div>
         <Menu
           defaultSelectedKeys={['1']}
@@ -40,7 +40,7 @@ class Nav extends Component {
           selectedKeys={[this.state.current]}
           onClick={this.handleClick}
         >
-          <Item key="Home">
+          {/* <Item key="Home">
             <Link to="/Home">
               <Icon type="dashboard" />
               <Icon type="dashboard" theme="filled" />
@@ -57,8 +57,8 @@ class Nav extends Component {
           </Item>
           <Item key="Chart">
             <Link to="/Chart">Chart</Link>
-          </Item>
-          {/* <Item key="Window">
+          </Item> */}
+          <Item key="Window">
             <Link to="/Window">窗口</Link>
           </Item>
           <Item key="IPC">
@@ -87,7 +87,7 @@ class Nav extends Component {
           </Item>
           <Item key="Chart">
             <Link to="/Chart">Chart</Link>
-          </Item> */}
+          </Item>
         </Menu>
       </div>
     );

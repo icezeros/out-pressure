@@ -48,7 +48,7 @@ export default class Home extends PureComponent {
               {/* <Button type="primary" size="large">
                 开始
               </Button> */}
-              <Button variant="contained" color="secondary">
+              <Button variant="contained" color="secondary" width="300">
                 开始测量
               </Button>
             </Paper>
@@ -63,7 +63,7 @@ export default class Home extends PureComponent {
               <Button variant="contained" fullWidth color="primary">
                 压力置零
               </Button>
-              <Divider />
+              <Divider>压力</Divider>
               <p>压力:</p>
 
               {currentPressure}
@@ -79,7 +79,7 @@ export default class Home extends PureComponent {
               <Button variant="contained" fullWidth color="primary">
                 位移置零
               </Button>
-              <Divider />
+              <Divider>位移</Divider>
               <p>位移:</p>
             </Paper>
           </Col>
