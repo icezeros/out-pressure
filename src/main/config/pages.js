@@ -6,8 +6,10 @@ export default {
   main: {
     window: {
       title: 'Test',
-      width: 1024,
-      height: 768,
+      //   width: 1024,
+      //   height: 768,
+      width: 1280,
+      height: 800,
       minWidth: 840,
       minHeight: 420,
       //   fullscreen: true,

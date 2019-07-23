@@ -44,7 +44,7 @@ export default class Home extends PureComponent {
               elevation={20}
               raised={true}
               bordered={true}
-              style={{ height: 200, padding: 20 }}
+              style={{ height: 260, padding: 20 }}
             >
               {/* <Button type="primary" size="large">
                 开始
@@ -54,7 +54,7 @@ export default class Home extends PureComponent {
                 fullWidth
                 variant="contained"
                 color="primary"
-                style={{ height: 150 }}
+                style={{ height: '100%' }}
               >
                 XXXXX
               </Button>
@@ -65,7 +65,7 @@ export default class Home extends PureComponent {
               elevation={20}
               raised={true}
               title="XXXXX"
-              style={{ height: 200, padding: 20 }}
+              style={{ height: 260, padding: 20 }}
             >
               <Button variant="contained" fullWidth color="primary">
                 XXXX
@@ -79,7 +79,7 @@ export default class Home extends PureComponent {
               elevation={20}
               raised={true}
               title="XXXXX"
-              style={{ height: 200, padding: 20 }}
+              style={{ height: 260, padding: 20 }}
             >
               <Button variant="contained" fullWidth color="primary">
                 XXXX
@@ -91,36 +91,4 @@ export default class Home extends PureComponent {
       </div>
     );
   }
-}
-{
-  /* <div>
-        <div className={styles.dataContainer}>
-          <Row>
-            <Col span={8}>
-              <Button type="primary">压力置零</Button>
-            </Col>
-            <Col span={8}>
-              <Button type="primary">开始</Button>
-            </Col>
-            <Col span={8}>col-8</Col>
-          </Row>
-        </div>
-
-        <Row>
-          <Col span={6}>col-6</Col>
-          <Col span={6}>col-6</Col>
-          <Col span={6}>col-6</Col>
-          <Col span={6}>col-6</Col>
-        </Row>
-        <Row>
-          <Col span={24}>sdfasdfasdf</Col>
-        </Row>
-        <Card title="卡片标题">
-          <Col span={18}>
-            <CurvedChart />
-          </Col>
-          <Col span={6}>4444</Col>
-        </Card>
-        <Row />
-      </div> */
 }

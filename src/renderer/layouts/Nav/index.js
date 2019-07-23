@@ -42,7 +42,6 @@ class Nav extends Component {
         >
           <Item key="Home">
             <Link to="/Home">
-              <Icon type="dashboard" />
               <Icon type="dashboard" theme="filled" />
               <span>仪表盘</span>
             </Link>
@@ -50,7 +49,6 @@ class Nav extends Component {
 
           <Item key="History">
             <Link to="/History">
-              <Icon type="history" />
               <Icon type="database" theme="filled" />
               <span>历史数据</span>
             </Link>
@@ -61,7 +59,7 @@ class Nav extends Component {
           <Item key="Chart">
             <Link to="/Chart">Chart</Link>
           </Item>
-          <Item key="Window">
+          {/* <Item key="Window">
             <Link to="/Window">窗口</Link>
           </Item>
           <Item key="IPC">
@@ -90,7 +88,7 @@ class Nav extends Component {
           </Item>
           <Item key="Chart">
             <Link to="/Chart">Chart</Link>
-          </Item>
+          </Item> */}
         </Menu>
       </div>
     );
