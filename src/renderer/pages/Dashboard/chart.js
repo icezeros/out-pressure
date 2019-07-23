@@ -31,8 +31,8 @@ export default class Chart extends Component {
     console.log('============ historyPressures =============');
     console.log(historyPressures);
     const index = historyPressures
-      ? historyPressures.length > 100
-        ? historyPressures.length - 100
+      ? historyPressures.length > 10
+        ? historyPressures.length - 10
         : 0
       : 0;
     return (
