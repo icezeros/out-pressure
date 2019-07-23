@@ -56,7 +56,7 @@ export default class Home extends PureComponent {
                 color="primary"
                 style={{ height: 150 }}
               >
-                开始测量
+                XXXXX
               </Button>
             </Paper>
           </Col>
@@ -64,13 +64,13 @@ export default class Home extends PureComponent {
             <Paper
               elevation={20}
               raised={true}
-              title="压力"
+              title="XXXXX"
               style={{ height: 200, padding: 20 }}
             >
               <Button variant="contained" fullWidth color="primary">
-                压力置零
+                XXXX
               </Button>
-              <Divider>压力</Divider>
+              <Divider>XXXX</Divider>
               <p style={{ size: 66 }}>{}</p>
             </Paper>
           </Col>
@@ -78,13 +78,13 @@ export default class Home extends PureComponent {
             <Paper
               elevation={20}
               raised={true}
-              title="位移"
+              title="XXXXX"
               style={{ height: 200, padding: 20 }}
             >
               <Button variant="contained" fullWidth color="primary">
-                位移置零
+                XXXX
               </Button>
-              <Divider>位移</Divider>
+              <Divider>XXXXX</Divider>
             </Paper>
           </Col>
         </Row>
