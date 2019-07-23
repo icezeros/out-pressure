@@ -40,8 +40,8 @@ class Nav extends Component {
           selectedKeys={[this.state.current]}
           onClick={this.handleClick}
         >
-          <Item key="Home">
-            <Link to="/Home">
+          <Item key="Dashboard">
+            <Link to="/Dashboard">
               <Icon type="dashboard" theme="filled" />
               <span>仪表盘</span>
             </Link>
@@ -51,6 +51,12 @@ class Nav extends Component {
             <Link to="/History">
               <Icon type="database" theme="filled" />
               <span>历史数据</span>
+            </Link>
+          </Item>
+          <Item key="Setting">
+            <Link to="/Setting">
+              <Icon type="setting" theme="filled" />
+              <span>设置</span>
             </Link>
           </Item>
           <Item key="Demo">

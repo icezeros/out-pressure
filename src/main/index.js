@@ -45,6 +45,16 @@ async function init() {
   await handelAppReady();
   handleQuit();
   handleMessage();
+  let i = 0;
+  setInterval(() => {
+    const tmpData = {
+      date: i,
+      pressure: Math.floor(Math.random() * 100),
+    };
+    const mainWindow = global.application.windowManager.getWindow('main');
+    mainWindow.webContents.send('main-msg', tmpData);
+    i++;
+  }, 100);
 }
 
 function handelAppReady() {

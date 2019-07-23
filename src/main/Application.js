@@ -83,6 +83,9 @@ export default class Application extends EventEmitter {
   }
 
   show(page = 'main') {
+    if (page === 'main') {
+      this.mainWindow = this.windowManager.getWindow('main');
+    }
     this.windowManager.showWindow(page);
   }
 

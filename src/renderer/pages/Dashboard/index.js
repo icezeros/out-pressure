@@ -12,6 +12,8 @@ import styles from './index.css';
 console.log('============ CurvedChart =============');
 console.log(CurvedChart);
 
+import Chart from './chart';
+
 // @connect(({ sensor }) => ({
 //   sensor,
 //   currentPressure: sensor.currentPressure,
@@ -34,7 +36,7 @@ export default class Home extends PureComponent {
             bordered={true}
             style={{ height: 400, padding: 0 }}
           >
-            <CurvedChart />
+            <Chart />
           </Paper>
         </Row>
 

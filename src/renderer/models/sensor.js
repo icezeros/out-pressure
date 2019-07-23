@@ -34,7 +34,7 @@ export default {
       console.log('============ state =============');
       console.log(state);
       const historyPressures = [...state.historyPressures, payload.pressure];
-      if (historyPressures.length > 20) {
+      if (historyPressures.length > 800) {
         historyPressures.shift();
       }
       return {

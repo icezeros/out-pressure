@@ -11,12 +11,12 @@ const { Header } = Layout;
 }))
 class HeaderComponent extends Component {
   render() {
-    const { currentPressure = 0 } = this.props;
+    const { currentPressure } = this.props;
     return (
       <Header className="header">
         <Row>
           <Col span={8}>col-12</Col>
-          <Col span={8}>压力: {currentPressure}</Col>
+          <Col span={8}>压力: {currentPressure.pressure}</Col>
           <Col span={8}>col-6</Col>
         </Row>
       </Header>

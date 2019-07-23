@@ -6,13 +6,13 @@ import 'antd/dist/antd.less';
 import Paper from '@material-ui/core/Paper';
 
 import zhCN from 'antd/lib/locale-provider/zh_CN';
+import { ipcRenderer } from 'electron';
 import Header from './Header';
 import Nav from './Nav';
 // import RouteContent from '$routes';
 import './index.css';
 
 const { Content } = Layout;
-
 // var { ipcRenderer } = require('electron');
 // let ipcRenderer;
 // let electron;
@@ -23,19 +23,17 @@ const { Content } = Layout;
 @connect(({}) => ({}))
 export default class App extends Component {
   componentDidMount() {
-    // ipcRenderer.send('window-inited', {
-    //   userAgent: navigator.userAgent,
-    // });
-    console.log('============ 123454321 =============');
-    console.log(123454321);
-    setInterval(() => {
+    ipcRenderer.on('main-msg', (event, msg) => {
+      //   this.setState({ msg });
+      console.log('============ msg =============');
+      console.log(msg);
       this.props.dispatch({
         type: 'sensor/updatePressure',
         payload: {
-          pressure: Math.random(),
+          pressure: msg,
         },
       });
-    }, 1000);
+    });
   }
 
   render() {

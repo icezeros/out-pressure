@@ -7,6 +7,7 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
+  Label,
   Brush,
   AreaChart,
   Area,
@@ -311,9 +312,22 @@ export default class Demo extends Component {
             data={data03}
             margin={{ top: 40, right: 40, bottom: 20, left: 20 }}
           >
-            <CartesianGrid vertical={false} />
-            <XAxis dataKey="date" label="Date" />
-            <YAxis domain={['auto', 'auto']} label="Stock Price" />
+            <CartesianGrid strokeDasharray="3 3" vertical={false} />
+
+            <XAxis interval="10" dataKey="date">
+              <Label value="时间" offset="-33" position="insideBottomRight" />
+            </XAxis>
+            <YAxis
+              domain={['auto', 'auto']}
+              axisLine="false"
+              tickLine="false"
+              label={{
+                value: '压力',
+                offset: -5,
+                position: 'insideTopLeft',
+              }}
+              labelStyle={{ marginLeft: 500 }}
+            />
             <Tooltip
               wrapperStyle={{
                 borderColor: 'white',
@@ -322,15 +336,16 @@ export default class Demo extends Component {
               contentStyle={{ backgroundColor: 'rgba(255, 255, 255, 0.8)' }}
               labelStyle={{ fontWeight: 'bold', color: '#666666' }}
             />
-            <Line dataKey="price" stroke="#0668c9" dot />
+            <Legend />
+            <Line dataKey="price" stroke="#0be636" dot />
             <Brush dataKey="date" startIndex={index}>
               <AreaChart>
                 <CartesianGrid />
                 <YAxis hide domain={['auto', 'auto']} />
                 <Area
                   dataKey="price"
-                  stroke="#0668c9"
-                  fill="#0668c9"
+                  stroke="#0be636"
+                  fill="#0be636"
                   dot={false}
                 />
               </AreaChart>
