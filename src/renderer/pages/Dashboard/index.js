@@ -9,10 +9,9 @@ import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 
 import styles from './index.css';
-console.log('============ CurvedChart =============');
-console.log(CurvedChart);
 
 import Chart from './chart';
+import Pressure from './pressure';
 
 // @connect(({ sensor }) => ({
 //   sensor,
@@ -25,8 +24,6 @@ export default class Home extends PureComponent {
   }
   render() {
     const {} = this.props;
-    console.log('============ currentPressure =============');
-    console.log();
     return (
       <div>
         <Row>
@@ -72,8 +69,8 @@ export default class Home extends PureComponent {
               <Button variant="contained" fullWidth color="primary">
                 XXXX
               </Button>
-              <Divider>XXXX</Divider>
-              <p style={{ size: 66 }}>{}</p>
+              <Divider />
+              <Pressure />
             </Paper>
           </Col>
           <Col span={8}>

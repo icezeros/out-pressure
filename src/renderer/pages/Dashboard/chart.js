@@ -28,8 +28,6 @@ export default class Chart extends Component {
 
   render() {
     const { historyPressures } = this.props;
-    console.log('============ historyPressures =============');
-    console.log(historyPressures);
     const index = historyPressures
       ? historyPressures.length > 10
         ? historyPressures.length - 10
@@ -54,7 +52,7 @@ export default class Chart extends Component {
             tickLine="false"
             label={{
               value: '压力',
-              offset: -5,
+              offset: '-5',
               position: 'insideTopLeft',
             }}
             labelStyle={{ marginLeft: 500 }}

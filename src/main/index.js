@@ -54,7 +54,7 @@ async function init() {
     const mainWindow = global.application.windowManager.getWindow('main');
     mainWindow.webContents.send('main-msg', tmpData);
     i++;
-  }, 100);
+  }, 1000);
 }
 
 function handelAppReady() {

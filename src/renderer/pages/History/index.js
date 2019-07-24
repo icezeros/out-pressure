@@ -1,5 +1,5 @@
 import { Table, Divider, Tag /* Card */ } from 'antd';
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import Card from '@material-ui/core/Card';
 import Paper from '@material-ui/core/Paper';
 const { Column, ColumnGroup } = Table;
@@ -30,7 +30,7 @@ const data = [
     tags: ['cool', 'teacher'],
   },
   {
-    key: '1',
+    key: '4',
     firstName: 'John',
     lastName: 'Brown',
     age: 32,
@@ -38,7 +38,7 @@ const data = [
     tags: ['nice', 'developer'],
   },
   {
-    key: '2',
+    key: '5',
     firstName: 'Jim',
     lastName: 'Green',
     age: 42,
@@ -46,7 +46,7 @@ const data = [
     tags: ['loser'],
   },
   {
-    key: '3',
+    key: '6',
     firstName: 'Joe',
     lastName: 'Black',
     age: 32,
@@ -54,7 +54,7 @@ const data = [
     tags: ['cool', 'teacher'],
   },
   {
-    key: '1',
+    key: '7',
     firstName: 'John',
     lastName: 'Brown',
     age: 32,
@@ -62,7 +62,7 @@ const data = [
     tags: ['nice', 'developer'],
   },
   {
-    key: '2',
+    key: '8',
     firstName: 'Jim',
     lastName: 'Green',
     age: 42,
@@ -70,7 +70,7 @@ const data = [
     tags: ['loser'],
   },
   {
-    key: '3',
+    key: '9',
     firstName: 'Joe',
     lastName: 'Black',
     age: 32,
@@ -78,7 +78,7 @@ const data = [
     tags: ['cool', 'teacher'],
   },
   {
-    key: '3',
+    key: '10',
     firstName: 'Joe',
     lastName: 'Black',
     age: 32,
@@ -86,8 +86,20 @@ const data = [
     tags: ['cool', 'teacher'],
   },
 ];
-export default class History extends PureComponent {
+export default class History extends Component {
+  constructor() {
+    super();
+    this.state = {
+      pageCurrent: 1,
+    };
+  }
+  onChange = pageInfo => {
+    this.setState({
+      pageCurrent: pageInfo.current,
+    });
+  };
   render() {
+    const { pageCurrent } = this.state;
     return (
       <Paper
         raised={true}
@@ -96,7 +108,11 @@ export default class History extends PureComponent {
           paddingTop: 10,
         }}
       >
-        <Table dataSource={data}>
+        <Table
+          dataSource={data}
+          pagination={{ total: 500, defaultCurrent: 1, current: pageCurrent }}
+          onChange={this.onChange}
+        >
           <Column title="First Name" dataIndex="firstName" key="firstName" />
 
           <Column title="Age" dataIndex="age" key="age" />
@@ -130,41 +146,4 @@ export default class History extends PureComponent {
       </Paper>
     );
   }
-}
-{
-  /* <Card style={{ padding: 0, margin: 0 }}>
-        <Table dataSource={data}>
-         
-          <Column title="First Name" dataIndex="firstName" key="firstName" />
-
-          <Column title="Age" dataIndex="age" key="age" />
-          <Column title="Address" dataIndex="address" key="address" />
-          <Column
-            title="Tags"
-            dataIndex="tags"
-            key="tags"
-            render={tags => (
-              <span>
-                {tags.map(tag => (
-                  <Tag color="blue" key={tag}>
-                    {tag}
-                  </Tag>
-                ))}
-              </span>
-            )}
-          />
-          <Column
-            title="Action"
-            key="action"
-            render={(text, record) => (
-              <span>
-                <a href="javascript:;">Invite {record.lastName}</a>
-                <Divider type="vertical" />
-                <a href="javascript:;">Delete</a>
-              </span>
-            )}
-          />
-        </Table>
-      
-        </Card> */
 }

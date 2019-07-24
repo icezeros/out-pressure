@@ -26,8 +26,6 @@ class Print extends React.Component {
       printers: mainWindow.webContents.getPrinters(),
       curretnPrinter: '',
     };
-    console.log('============ 111111 =============');
-    console.log(111111);
   }
 
   changePrinter = curretnPrinter => {
@@ -101,8 +99,6 @@ class Print extends React.Component {
       printers,
       curretnPrinter,
     } = this.state;
-    console.log('============ 222222 =============');
-    console.log(222222);
     return (
       <div className={styles.demoContainer}>
         <Alert

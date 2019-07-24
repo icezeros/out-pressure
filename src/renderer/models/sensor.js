@@ -29,10 +29,6 @@ export default {
   },
   reducers: {
     updatePressure(state, { payload }) {
-      console.log('============ payload =============');
-      console.log(payload);
-      console.log('============ state =============');
-      console.log(state);
       const historyPressures = [...state.historyPressures, payload.pressure];
       if (historyPressures.length > 100) {
         historyPressures.shift();

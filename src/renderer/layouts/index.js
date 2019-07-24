@@ -25,8 +25,6 @@ export default class App extends Component {
   componentDidMount() {
     ipcRenderer.on('main-msg', (event, msg) => {
       //   this.setState({ msg });
-      console.log('============ msg =============');
-      console.log(msg);
       this.props.dispatch({
         type: 'sensor/updatePressure',
         payload: {

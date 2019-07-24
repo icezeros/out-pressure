@@ -31,10 +31,6 @@ function analyData({ time, data }) {
     time,
     value: Number(arr[2]),
   };
-  console.log('============ result =============');
-  console.log(result);
-
-  console.log();
 }
 
 module.exports = {

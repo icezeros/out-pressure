@@ -46,10 +46,6 @@ export default class Demo extends Component {
         amt: 2600,
       });
       i++;
-      console.log('============ i =============');
-      console.log(i);
-      console.log('============ tmpData =============');
-      console.log(tmpData);
       this.setState(() => {
         return { data: [...tmpData] };
       });

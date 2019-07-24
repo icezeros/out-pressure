@@ -61,8 +61,6 @@ class System extends React.Component {
   determineScreenShotSize = () => {
     const screenSize = screen.getPrimaryDisplay().workAreaSize;
     const maxDimension = Math.max(screenSize.width, screenSize.height);
-    console.log('============ maxDimension =============');
-    console.log(maxDimension);
     return {
       width: maxDimension * window.devicePixelRatio,
       height: maxDimension * window.devicePixelRatio,

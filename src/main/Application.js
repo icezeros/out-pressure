@@ -68,8 +68,6 @@ export default class Application extends EventEmitter {
 
   showPage(page, options = {}) {
     const { openedAtLogin } = options;
-    console.log('============ 111 =============');
-    console.log(111);
     const win = this.windowManager.openWindow(page, {
       hidden: openedAtLogin,
     });
