@@ -10,8 +10,7 @@
 
 const path = require('path');
 const fs = require('fs-extra');
-// const DataStore = require('nedb');
-const DataStore = require('nedb-async').default;
+const DataStore = require('nedb');
 
 const dbCommonConfig = {
   autoload: true,
