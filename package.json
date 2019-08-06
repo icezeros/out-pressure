@@ -35,6 +35,7 @@
     "dist": "electron-builder",
     "prettier": "prettier --list-different \"./**/*.{ts,tsx,js,jsx,less}\"",
     "pi": "npm run build:renderer && npm run build-main-prod && electron-packager ./ --overwrite --platform=linux --arch=armv7l",
+    "rebuild": "electron-rebuild -f -w serialport",
     "pi2": "electron-packager ./ --overwrite --platform=linux --arch=armv7l"
   },
   "keywords": [
