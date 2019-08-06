@@ -1,9 +1,17 @@
-const SerialPortDriver = require('serialport');
-const iconv = require('iconv-lite'); // 引入数据编码格式转换模块
-const moment = require('dayjs');
+// const SerialPortDriver = require('serialport');
+// const iconv = require('iconv-lite'); // 引入数据编码格式转换模块
+// const moment = require('moment');
 
+import SerialPortDriver from 'serialport';
+import iconv from 'iconv-lite';
+import moment from 'moment';
 class SerialPort {
-  constructor({ baudRate = 9600, autoOpen = true, dataBits = 7, stopBits = 1 }) {
+  constructor({
+    baudRate = 9600,
+    autoOpen = true,
+    dataBits = 7,
+    stopBits = 1,
+  }) {
     this.serialPort = null;
     this.baudRate = baudRate;
     this.autoOpen = autoOpen;
@@ -30,7 +38,7 @@ class SerialPort {
       that.messageCb = messageCb;
     }
     // that.serialPort = new SerialPort('/dev/tty.wchusbserial14410', {
-    that.serialPort = new SerialPortDriver('/dev/tty.wchusbserial14610', {
+    that.serialPort = new SerialPortDriver('/dev/tty.usbserial-14610', {
       // 波特率，可在设备管理器中对应端口的属性中查看
       baudRate: that.baudRate,
       autoOpen: that.autoOpen,
@@ -38,13 +46,13 @@ class SerialPort {
       stopBits: that.stopBits,
       // parity: parity,
     });
-    that.serialPort.on('data', (data) => {
+    that.serialPort.on('data', data => {
       if (that.messageCb) {
         that.messageCb({ time: moment(), data });
       }
     });
     // 错误监听
-    that.serialPort.on('error', (error) => {
+    that.serialPort.on('error', error => {
       console.log(`error: ${error}`);
     });
   }
@@ -74,4 +82,4 @@ class SerialPort {
   //   }
 }
 
-module.exports = SerialPort;
+export default SerialPort;

@@ -23,7 +23,7 @@ const { Content } = Layout;
 @connect(({}) => ({}))
 export default class App extends Component {
   componentDidMount() {
-    ipcRenderer.on('main-msg', (event, msg) => {
+    ipcRenderer.on('main-msg-pressure', (event, msg) => {
       //   this.setState({ msg });
       this.props.dispatch({
         type: 'sensor/updatePressure',

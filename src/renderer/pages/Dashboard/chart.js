@@ -13,6 +13,7 @@ import {
   Area,
 } from 'recharts';
 import { connect } from 'dva';
+import moment from 'moment';
 @connect(({ sensor }) => ({
   sensor,
   historyPressures: sensor.historyPressures,
@@ -89,7 +90,26 @@ export default class Chart extends Component {
         >
           <CartesianGrid strokeDasharray="3 3" vertical={false} />
 
-          <XAxis interval="10" dataKey="date">
+          <XAxis
+            interval="10"
+            dataKey="index"
+            domain={[
+              (historyPressures &&
+                historyPressures[startIndexTmp] &&
+                historyPressures[startIndexTmp].index) ||
+                'auto',
+              (historyPressures &&
+                historyPressures[endIndexTmp] &&
+                historyPressures[endIndexTmp].index) ||
+                'auto',
+            ]}
+            type="number"
+            tickFormatter={value => {
+              console.log('============ value =============');
+              console.log(value);
+              return moment.duration(value, 'ms').asSeconds();
+            }}
+          >
             <Label value="时间" offset={-33} position="insideBottomRight" />
           </XAxis>
           <YAxis
@@ -113,21 +133,31 @@ export default class Chart extends Component {
           />
           <Legend />
           <Line
-            dataKey="pressure"
+            dataKey="value"
             isAnimationActive={false}
             stroke="#0be636"
             dot
           />
           <Brush
-            dataKey="date"
+            dataKey="index"
             startIndex={startIndexTmp}
             endIndex={endIndexTmp}
             onChange={this.test}
           >
             <AreaChart>
               <YAxis hide domain={['auto', 'auto']} />
+              <XAxis
+                interval="10"
+                dataKey="index"
+                domain={[
+                  historyPressures[0].index || 'auto',
+                  historyPressures[historyPressures.length - 1].index || 'auto',
+                ]}
+                type="number"
+                hide={true}
+              />
               <Area
-                dataKey="pressure"
+                dataKey="value"
                 stroke="#0be636"
                 fill="#0be636"
                 isAnimationActive={false}

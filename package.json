@@ -57,6 +57,7 @@
     "electron-builder": "^20.39.0",
     "electron-debug": "^2.2.0",
     "electron-packager": "^14.0.1",
+    "electron-rebuild": "^1.8.5",
     "electron-webpack": "^2.6.2",
     "prettier": "1.17.0",
     "uglifyjs-webpack-plugin": "^2.1.2",

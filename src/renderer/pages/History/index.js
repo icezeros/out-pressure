@@ -92,10 +92,11 @@ export default class History extends Component {
     super();
     this.state = {
       pageCurrent: 1,
+      data: data,
       visible: false,
     };
   }
-  onChange = pageInfo => {
+  onChangePage = pageInfo => {
     this.setState({
       pageCurrent: pageInfo.current,
     });
@@ -120,10 +121,10 @@ export default class History extends Component {
     });
   };
   render() {
-    const { pageCurrent } = this.state;
+    const { pageCurrent, data } = this.state;
     return (
       <div>
-        <Paper
+        {/* <Paper
           raised={true}
           elevation={20}
           style={{
@@ -132,7 +133,7 @@ export default class History extends Component {
         >
           {''}
           w2323423
-        </Paper>
+        </Paper> */}
         <Paper
           raised={true}
           elevation={20}
@@ -146,7 +147,7 @@ export default class History extends Component {
             dataSource={data}
             size="middle"
             pagination={{ total: 500, defaultCurrent: 1, current: pageCurrent }}
-            onChange={this.onChange}
+            onChange={this.onChangePage}
             onRow={(record, index) => {
               return {
                 onClick: event => {
