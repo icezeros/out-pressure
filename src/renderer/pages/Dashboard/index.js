@@ -9,21 +9,34 @@ import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 
 import styles from './index.css';
-
+import moment from 'moment';
 import Chart from './chart';
 import Pressure from './pressure';
-
-// @connect(({ sensor }) => ({
-//   sensor,
-//   currentPressure: sensor.currentPressure,
-// }))
+import { ipcRenderer } from 'electron';
+@connect(({ sensor }) => ({
+  sensor,
+  currentPressure: sensor.currentPressure,
+}))
 export default class Home extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {};
   }
+  handleStart = e => {
+    console.log('============ e =============');
+    console.log(e);
+    ipcRenderer.send('pressure-start', {
+      a: 1,
+    });
+  };
+  handlePressureZero = () => {
+    ipcRenderer.send('pressure-zero', {
+      a: 1,
+    });
+  };
   render() {
-    const {} = this.props;
+    const { currentPressure } = this.props;
+
     return (
       <div>
         <Row>
@@ -54,8 +67,15 @@ export default class Home extends PureComponent {
                 variant="contained"
                 color="primary"
                 style={{ height: '100%' }}
+                onClick={this.handleStart}
               >
-                XXXXX
+                {currentPressure.job && currentPressure.job.enabled ? (
+                  <font style={{ fontSize: '300%' }}>
+                    {`结束(${currentPressure.job.countDown})`}
+                  </font>
+                ) : (
+                  <font style={{ fontSize: '400%' }}>开 始</font>
+                )}
               </Button>
             </Paper>
           </Col>
@@ -66,10 +86,15 @@ export default class Home extends PureComponent {
               title="XXXXX"
               style={{ height: 260, padding: 20 }}
             >
-              <Button variant="contained" fullWidth color="primary">
-                XXXX
+              <Button
+                variant="contained"
+                fullWidth
+                color="primary"
+                onClick={this.handlePressureZero}
+              >
+                压力归零
               </Button>
-              <Divider />
+              <Divider>压力</Divider>
               <Pressure />
             </Paper>
           </Col>
@@ -81,9 +106,9 @@ export default class Home extends PureComponent {
               style={{ height: 260, padding: 20 }}
             >
               <Button variant="contained" fullWidth color="primary">
-                XXXX
+                位移归零
               </Button>
-              <Divider>XXXXX</Divider>
+              <Divider>位移</Divider>
             </Paper>
           </Col>
         </Row>

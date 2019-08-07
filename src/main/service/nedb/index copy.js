@@ -40,11 +40,7 @@ module.exports = class Db {
     this.initCollections();
   }
   initCollections() {
-    console.log('============ this.dbPath =============');
-    console.log(this.dbPath);
     const dbFiles = this.getDbFiles(this.dbPath);
-    console.log('============ dbFiles =============');
-    console.log(dbFiles);
     dbFiles.forEach(file => {
       this.collections.set(
         file,
@@ -75,8 +71,6 @@ module.exports = class Db {
     }
   }
   addCollection(file) {
-    console.log('============ file =============');
-    console.log(file);
     if (this.collections.has(file)) {
       throw new Error(`${file} 已经存在`);
     }

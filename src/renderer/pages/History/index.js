@@ -4,6 +4,7 @@ import ChartModal from './chart-modal';
 import Card from '@material-ui/core/Card';
 import Paper from '@material-ui/core/Paper';
 const { Column, ColumnGroup } = Table;
+import { ipcRenderer } from 'electron';
 
 const data = [
   {
@@ -91,14 +92,35 @@ export default class History extends Component {
   constructor() {
     super();
     this.state = {
+      pageInfo: { total: 500, defaultCurrent: 1, current: 1 },
       pageCurrent: 1,
       data: data,
       visible: false,
+      chartData: [],
     };
   }
+  componentWillMount() {
+    this.rendDataByPages({ current: 1, pageSize: 10 });
+  }
   onChangePage = pageInfo => {
+    this.rendDataByPages(pageInfo);
+  };
+  // { current: 2, defaultCurrent: 1, pageSize: 10, total: 500 }
+
+  rendDataByPages = pageInfo => {
+    console.log('============ pageInfo =============');
+    console.log(pageInfo);
+
+    const { data, total } = ipcRenderer.sendSync(
+      'get-history-page-sync',
+      pageInfo
+    );
+    console.log('============ result =============');
+    console.log(data);
+    // { total: 500, defaultCurrent: 1, current: 1 },
     this.setState({
-      pageCurrent: pageInfo.current,
+      pageInfo: { ...pageInfo, total: total },
+      data: data,
     });
   };
   handleCancel = e => {
@@ -116,12 +138,18 @@ export default class History extends Component {
   clickRow = data => {
     console.log('========data');
     console.log(data);
+    const result = ipcRenderer.sendSync('get-history-info-sync', data._id);
+    console.log('============ result =============');
+    console.log(result);
     this.setState({
       visible: true,
+      chartData: result,
     });
   };
+  // {"max":91,"min":1,"count":3,"average":41.666666666666664,"duration":3.679,"_id":"qJWkKjZLIsbOzvFs","createdAt":{"$$date":1565159110762},"updatedAt":{"$$date":1565159114443}}
+
   render() {
-    const { pageCurrent, data } = this.state;
+    const { pageCurrent, data, pageInfo, chartData } = this.state;
     return (
       <div>
         {/* <Paper
@@ -145,8 +173,7 @@ export default class History extends Component {
           {''}
           <Table
             dataSource={data}
-            size="middle"
-            pagination={{ total: 500, defaultCurrent: 1, current: pageCurrent }}
+            pagination={pageInfo}
             onChange={this.onChangePage}
             onRow={(record, index) => {
               return {
@@ -167,11 +194,13 @@ export default class History extends Component {
               };
             }}
           >
-            <Column title="First Name" dataIndex="firstName" key="firstName" />
+            <Column title="编号" dataIndex="index" key="index" />
 
-            <Column title="Age" dataIndex="age" key="age" />
-            <Column title="Address" dataIndex="address" key="address" />
-            <Column
+            <Column title="最大值" dataIndex="max" key="max" />
+            <Column title="最小值" dataIndex="min" key="min" />
+            <Column title="记录节点数" dataIndex="count" key="count" />
+            <Column title="持续时间" dataIndex="duration" key="duration" />
+            {/* <Column
               title="Tags"
               dataIndex="tags"
               key="tags"
@@ -184,15 +213,17 @@ export default class History extends Component {
                   ))}
                 </span>
               )}
-            />
+            /> */}
             <Column
-              title="Action"
+              title="操作"
               key="action"
               render={(text, record) => (
                 <span>
                   <a onClick={() => this.clickRow(record)}>
                     详情 {record.lastName}
                   </a>
+                  <Divider type="vertical" />
+                  <a href="javascript:;">导出</a>
                   <Divider type="vertical" />
                   <a href="javascript:;">删除</a>
                 </span>
@@ -203,6 +234,7 @@ export default class History extends Component {
             visible={this.state.visible}
             handleOk={this.handleOk}
             handleCancel={this.handleCancel}
+            data={chartData}
           />
         </Paper>
       </div>

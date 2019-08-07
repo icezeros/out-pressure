@@ -47,25 +47,6 @@ export default class Chart extends Component {
   render() {
     const { historyPressures = [] } = this.props;
     const { autoMove, startIndex, endIndex, areaLength } = this.state;
-    console.log('========= autoMove==========');
-    console.log(autoMove);
-    console.log();
-
-    console.log('========= startIndex==========');
-    console.log(startIndex);
-    console.log();
-
-    console.log('========= endIndex==========');
-    console.log(endIndex);
-    console.log();
-
-    console.log('========= areaLength==========');
-    console.log(areaLength);
-    console.log();
-
-    console.log('========= historyPressures.length==========');
-    console.log(historyPressures.length);
-    console.log();
 
     const endIndexTmp = autoMove ? historyPressures.length - 1 : endIndex;
     const startIndexTmp = autoMove
@@ -105,8 +86,6 @@ export default class Chart extends Component {
             ]}
             type="number"
             tickFormatter={value => {
-              console.log('============ value =============');
-              console.log(value);
               return moment.duration(value, 'ms').asSeconds();
             }}
           >
@@ -150,8 +129,11 @@ export default class Chart extends Component {
                 interval="10"
                 dataKey="index"
                 domain={[
-                  historyPressures[0].index || 'auto',
-                  historyPressures[historyPressures.length - 1].index || 'auto',
+                  (historyPressures[0] && historyPressures[0].index) || 'auto',
+                  (historyPressures[historyPressures.length - 1] &&
+                    historyPressures[historyPressures.length - 1].index) ||
+                    'auto' ||
+                    'auto',
                 ]}
                 type="number"
                 hide={true}

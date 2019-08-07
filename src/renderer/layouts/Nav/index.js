@@ -29,7 +29,7 @@ class Nav extends Component {
       >
         <div className="iconContainer">
           {/* <img src={icon} className="icon" /> */}
-          <span className="titleText">XXXXXX</span>
+          <span className="titleText">压力测试仪</span>
         </div>
         <Menu
           defaultSelectedKeys={['1']}
@@ -59,12 +59,12 @@ class Nav extends Component {
               <span>设置</span>
             </Link>
           </Item>
-          <Item key="Demo">
+          {/* <Item key="Demo">
             <Link to="/Demo">Demo</Link>
           </Item>
           <Item key="Chart">
             <Link to="/Chart">Chart</Link>
-          </Item>
+          </Item> */}
           {/* <Item key="Window">
             <Link to="/Window">窗口</Link>
           </Item>

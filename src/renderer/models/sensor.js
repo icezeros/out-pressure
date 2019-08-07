@@ -1,9 +1,21 @@
+import moment from 'moment';
 export default {
   namespace: 'sensor',
 
   state: {
     visible: false,
-    currentPressure: 0,
+    currentPressure: {
+      job: {
+        enabled: false,
+        time: 0,
+      },
+      baseTime: moment().format('x'),
+      baseValue: 0,
+      offset: 0,
+      value: 0,
+      index: 0,
+      time: moment().format('x'),
+    },
     historyPressures: [],
   },
   effects: {

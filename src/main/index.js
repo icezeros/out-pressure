@@ -50,38 +50,18 @@ async function init() {
   dbInit();
   await handelAppReady();
   const result = await SerialPort.scanPort();
-  console.log('============ result =============');
-  console.log(result);
 
   handleQuit();
   handleMessage();
   //   pressureInit();
   let i = 0;
   setInterval(() => {
-    // console.log('============ global.pressure =============');
-    // console.log(global.pressure);
-    // const mainWindow = global.application.windowManager.getWindow('main');
-    // mainWindow.webContents.send('main-msg-pressure', {
-    //   job: {
-    //     enabled: false,
-    //     time: 0,
-    //   },
-    //   baseTime: global.pressure.baseTime,
-    //   baseValue: 100,
-    //   offset: 0,
-    //   value: -100,
-    //   index: (moment().format('x') - global.pressure.baseTime) / 1000,
-    //   time: moment().format('x'),
-    // });
-    // { tag1: 'ST', tag3: 'NT', time: '1564410688501', value: 0 }
-    console.log('============ 4444 =============');
-    console.log(4444);
     const a = Math.floor(Math.random() * 100);
     analyPressure({
       time: moment(),
-      data: `ST,NT,+000${a > 95 ? a : 100}.00\r\n`,
+      data: `ST,NT,+000${a}.00\r\n`,
     });
-  }, 100);
+  }, 1000);
 }
 function dbInit() {
   global.db = new Db();
@@ -92,19 +72,15 @@ function globalPressure() {
       enabled: false,
       time: 0,
     },
-    baseTime: moment().format('x'),
+    baseTime: moment(),
     baseValue: -100,
     offset: 0,
     value: -100,
     index: 0,
-    time: moment().format('x'),
+    time: moment(),
   };
 }
 function pressureInit() {
-  console.log('============ SerialPort =============');
-  console.log(SerialPort);
-  console.log('============ analyPressure =============');
-  console.log(analyPressure);
   const serial = new SerialPort({});
   serial.openSerial(analyPressure);
   //   const mainWindow = global.application.windowManager.getWindow('main');
@@ -148,5 +124,3 @@ init();
 
 // test.addCollection(fileName);
 // test.collections.get(fileName).insert({ a: 1, b: 4 });
-// console.log('============ test =============');
-// console.log(test);

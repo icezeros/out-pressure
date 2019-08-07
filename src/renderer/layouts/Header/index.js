@@ -30,7 +30,7 @@ class HeaderComponent extends Component {
         {pathname !== '/Dashboard' ? (
           <Row>
             <Col span={8}>col-12</Col>
-            <Col span={8}>压力: {currentPressure.pressure}</Col>
+            <Col span={8}>压力: {currentPressure.value}</Col>
             <Col span={8}>col-6</Col>
           </Row>
         ) : (
