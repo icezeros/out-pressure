@@ -7,7 +7,7 @@
 // import path from 'path';
 // import fs from 'fs-extra';
 // import * as DataStore from 'nedb';
-// import os from 'os';
+import os from 'os';
 const path = require('path');
 const fs = require('fs-extra');
 // const DataStore = require('nedb');

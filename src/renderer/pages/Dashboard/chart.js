@@ -109,6 +109,12 @@ export default class Chart extends Component {
             }}
             contentStyle={{ backgroundColor: 'rgba(255, 255, 255, 0.8)' }}
             labelStyle={{ fontWeight: 'bold', color: '#666666' }}
+            formatter={(value, name) => {
+              return [value, name];
+            }}
+            labelFormatter={(value, name) => {
+              return [moment.duration(value, 'ms').asSeconds(), name];
+            }}
           />
           <Legend />
           <Line
