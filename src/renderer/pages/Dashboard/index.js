@@ -83,7 +83,7 @@ export default class Home extends PureComponent {
             <Paper
               elevation={20}
               raised={true}
-              title="XXXXX"
+              title="压力"
               style={{ height: 260, padding: 20 }}
             >
               <Button
@@ -102,7 +102,7 @@ export default class Home extends PureComponent {
             <Paper
               elevation={20}
               raised={true}
-              title="XXXXX"
+              title="位移"
               style={{ height: 260, padding: 20 }}
             >
               <Button variant="contained" fullWidth color="primary">

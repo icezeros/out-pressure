@@ -13,7 +13,7 @@ class Nav extends Component {
     console.log('============ location.hash =============');
     console.log(location.hash);
     const hash = location.hash.split('/')[1];
-    this.state = { current: hash ? hash : 'Home' };
+    this.state = { current: hash ? hash : 'Dashboard' };
   }
 
   handleClick = e => {

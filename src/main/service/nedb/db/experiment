@@ -3,6 +3,8 @@
 {"index":2,"status":"pending","_id":"EL79xkIf8VV39uOr","createdAt":{"$$date":1565161245185},"updatedAt":{"$$date":1565161245185}}
 {"index":8,"max":90,"min":55,"count":3,"average":68.66666666666667,"duration":2.802,"status":"finished","_id":"GlBXcLFVE33HFGPa","createdAt":{"$$date":1565161675178},"updatedAt":{"$$date":1565161677980}}
 {"index":9,"max":22,"min":-9,"count":4,"average":6,"duration":3.282,"status":"finished","_id":"HpCSYsR5uwrMFNEq","createdAt":{"$$date":1565161683576},"updatedAt":{"$$date":1565161686860}}
+{"index":16,"max":96,"min":-43,"count":60,"average":22.3,"duration":60.877,"status":"finished","_id":"KJXmTTpNScNMIL32","createdAt":{"$$date":1565171351128},"updatedAt":{"$$date":1565171412010}}
+{"index":17,"max":90,"min":-8,"count":60,"average":43.81666666666667,"duration":60.579,"status":"finished","_id":"Mz477Fig3FXBwBfP","createdAt":{"$$date":1565228353184},"updatedAt":{"$$date":1565228413767}}
 {"index":5,"max":53,"min":13,"count":3,"average":37,"duration":3.083,"status":"finished","_id":"NzU7l2uITWka0q7S","createdAt":{"$$date":1565161656877},"updatedAt":{"$$date":1565161659961}}
 {"index":0,"max":99,"min":1,"count":6,"average":55.833333333333336,"duration":6.208,"status":"finished","_id":"RFhWFhUQ4lmPWRo6","createdAt":{"$$date":1565161069239},"updatedAt":{"$$date":1565161075450}}
 {"index":7,"max":51,"min":3,"count":4,"average":35.25,"duration":3.799,"status":"finished","_id":"UjcpafuPWjqbPvuu","createdAt":{"$$date":1565161667413},"updatedAt":{"$$date":1565161671214}}

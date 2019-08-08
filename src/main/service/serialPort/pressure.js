@@ -6,6 +6,7 @@ import iconv from 'iconv-lite';
 import moment from 'moment';
 // { tag1: 'ST', tag3: 'NT', time: '1564410688501', value: 0 }
 // 引入数据编码格式转换模块
+iconv.skipDecodeWarning = true;
 export default async function analyPressure({ time, data }) {
   const pressure = global.pressure;
 
