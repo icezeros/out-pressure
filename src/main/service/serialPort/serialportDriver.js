@@ -38,7 +38,8 @@ class SerialPort {
       that.messageCb = messageCb;
     }
     // that.serialPort = new SerialPort('/dev/tty.wchusbserial14410', {
-    that.serialPort = new SerialPortDriver('/dev/tty.usbserial-14610', {
+    // that.serialPort = new SerialPortDriver('/dev/tty.usbserial-14610', {
+    that.serialPort = new SerialPortDriver('/dev/ttyUSB0', {
       // 波特率，可在设备管理器中对应端口的属性中查看
       baudRate: that.baudRate,
       autoOpen: that.autoOpen,

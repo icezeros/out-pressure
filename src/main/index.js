@@ -54,15 +54,15 @@ async function init() {
   console.log(result);
   handleQuit();
   handleMessage();
-  //   pressureInit();
+  pressureInit();
   let i = 0;
-  setInterval(() => {
-    const a = Math.floor(Math.random() * 100);
-    analyPressure({
-      time: moment(),
-      data: `ST,NT,+000${a}.00\r\n`,
-    });
-  }, 1000);
+  //   setInterval(() => {
+  //     const a = Math.floor(Math.random() * 100);
+  //     analyPressure({
+  //       time: moment(),
+  //       data: `ST,NT,+000${a}.00\r\n`,
+  //     });
+  //   }, 1000);
 }
 function dbInit() {
   global.db = new Db();
