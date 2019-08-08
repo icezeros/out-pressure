@@ -4,7 +4,6 @@ import { connect } from 'dva';
 import Card from '@material-ui/core/Card';
 import 'antd/dist/antd.less';
 import Paper from '@material-ui/core/Paper';
-import router from 'umi/router';
 
 import zhCN from 'antd/lib/locale-provider/zh_CN';
 import { ipcRenderer } from 'electron';
@@ -33,7 +32,6 @@ export default class App extends Component {
         },
       });
     });
-    router.push('/Dashboard');
   }
 
   render() {

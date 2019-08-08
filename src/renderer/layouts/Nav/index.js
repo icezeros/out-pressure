@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Layout, Menu, Row, Icon } from 'antd';
 import Link from 'umi/link';
+import router from 'umi/router';
+
 // import icon from '$public/image/icon.png';
 import './index.css';
 
@@ -10,10 +12,9 @@ const { Item, SubMenu } = Menu;
 class Nav extends Component {
   constructor(props) {
     super(props);
-    console.log('============ location.hash =============');
-    console.log(location.hash);
     const hash = location.hash.split('/')[1];
     this.state = { current: hash ? hash : 'Dashboard' };
+    router.push(`/${this.state.current}`);
   }
 
   handleClick = e => {

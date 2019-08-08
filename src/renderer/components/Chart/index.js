@@ -113,6 +113,9 @@ export default class Chart extends Component {
             startIndex={startIndexTmp}
             endIndex={endIndexTmp}
             onChange={this.test}
+            tickFormatter={value => {
+              return moment.duration(value, 'ms').asSeconds();
+            }}
           >
             <AreaChart>
               <YAxis hide domain={['auto', 'auto']} />
