@@ -92,7 +92,7 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "recharts": "^1.6.2",
-    "serialport": "6.2.2",
+    "serialport": "^7.1.5",
     "slash": "^3.0.0"
   },
   "electronWebpack": {

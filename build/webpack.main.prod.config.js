@@ -9,5 +9,8 @@ module.exports = merge.smart(baseConfig, {
   // plugins: [
   //   new UglifyJsPlugin()
   // ],
+  externals: {
+    serialport: 'commonjs serialport',
+  },
   mode: 'production',
 });
