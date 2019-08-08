@@ -7,7 +7,7 @@
 // import path from 'path';
 // import fs from 'fs-extra';
 // import * as DataStore from 'nedb';
-
+// import os from 'os';
 const path = require('path');
 const fs = require('fs-extra');
 // const DataStore = require('nedb');
@@ -37,7 +37,13 @@ module.exports = class Db {
     //     filename: path.resolve(__dirname, 'db', 'system'),
     //   })
     // );
-    this.dbPath = path.resolve(__dirname, 'db');
+    console.log('============  =============');
+    console.log(process.env.NODE_ENV);
+    this.dbPath =
+      process.env.NODE_ENV === 'development'
+        ? path.resolve(__dirname, 'db')
+        : path.resolve(os.homedir(), 'out-pressure-db');
+    // this.dbPath = path.resolve(__dirname, 'db');
     this.initCollections();
   }
   initCollections() {
@@ -91,7 +97,7 @@ module.exports = class Db {
       file,
       new DataStore({
         ...this.dbCommonConfig,
-        filename: path.resolve(__dirname, 'db', file),
+        filename: path.resolve(this.dbPath, file),
       })
     );
   }
