@@ -12,7 +12,7 @@ export default {
       height: 800,
       minWidth: 840,
       minHeight: 420,
-      //   fullscreen: true,
+      fullscreen: true,
       titleBarStyle: 'customButtonsOnHover',
       // backgroundColor: '#FFFFFF',
       //   transparent: !is.windows(),
