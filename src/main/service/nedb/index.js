@@ -37,7 +37,7 @@ module.exports = class Db {
     //     filename: path.resolve(__dirname, 'db', 'system'),
     //   })
     // );
-    this.dbPath = path.join(__dirname, 'db');
+    this.dbPath = path.resolve(__dirname, 'db');
     this.initCollections();
   }
   initCollections() {
