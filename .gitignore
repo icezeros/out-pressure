@@ -7,3 +7,4 @@ yarn.lock
 .history
 .vscode
 package-lock.json
+db/*

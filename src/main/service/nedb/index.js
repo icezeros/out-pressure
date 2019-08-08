@@ -41,6 +41,18 @@ module.exports = class Db {
     this.initCollections();
   }
   initCollections() {
+    if (!fs.existsSync(this.dbPath)) {
+      fs.mkdirSync(this.dbPath);
+    }
+
+    if (!this.collections.has('experiment')) {
+      this.addCollection('experiment');
+    }
+    if (!this.collections.has('log')) {
+      this.addCollection('log');
+    }
+    console.log('============ fs.stat(this.dbPath) =============');
+    console.log(fs.existsSync(this.dbPath));
     const dbFiles = this.getDbFiles(this.dbPath);
     dbFiles.forEach(file => {
       this.collections.set(
