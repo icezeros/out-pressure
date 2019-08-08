@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Layout, Row, Col } from 'antd';
 import './index.css';
 import { connect } from 'dva';
+import Fab from '@material-ui/core/Fab';
+import Icon from '@material-ui/core/Icon';
 
 const { Header } = Layout;
 
@@ -27,15 +29,21 @@ class HeaderComponent extends Component {
     console.log(pathname);
     return (
       <Header className="header">
-        {pathname !== '/Dashboard' ? (
-          <Row>
-            <Col span={8}>col-12</Col>
-            <Col span={8}>压力: {currentPressure.value}</Col>
-            <Col span={8}>col-6</Col>
-          </Row>
-        ) : (
-          ''
-        )}
+        <Row>
+          <Col span={8}>col-12</Col>
+          <Col span={8}>
+            {pathname !== '/Dashboard' ? (
+              <Col span={8}>压力: {currentPressure.value}</Col>
+            ) : (
+              ''
+            )}
+          </Col>
+          <Col style={{ paddingLeft: 200 }} span={8}>
+            <Fab size="small" variant="extended" aria-label="Edit">
+              关机
+            </Fab>
+          </Col>
+        </Row>
       </Header>
     );
   }

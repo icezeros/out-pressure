@@ -50,7 +50,8 @@ async function init() {
   dbInit();
   await handelAppReady();
   const result = await SerialPort.scanPort();
-
+  console.log('============ result =============');
+  console.log(result);
   handleQuit();
   handleMessage();
   //   pressureInit();
