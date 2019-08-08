@@ -4,14 +4,16 @@
 // const base58 = require('bs58');
 // const base64 = require('js-base64').Base64;
 
-// import path from 'path';
-// import fs from 'fs-extra';
+import path from 'path';
+import fs from 'fs-extra';
 // import * as DataStore from 'nedb';
 import os from 'os';
-const path = require('path');
-const fs = require('fs-extra');
-// const DataStore = require('nedb');
-const DataStore = require('nedb-async').default;
+import { default as DataStore } from 'nedb-async';
+
+// const path = require('path');
+// const fs = require('fs-extra');
+// const DataStore = require('nedb-async').default;
+// const os = require('os');
 
 const dbCommonConfig = {
   autoload: true,
@@ -20,8 +22,8 @@ const dbCommonConfig = {
   // beforeDeserialization: data => base64.decode(data),
 };
 
-// export default class Db {
-module.exports = class Db {
+export default class Db {
+  // module.exports = class Db {
   constructor() {
     this.dbCommonConfig = {
       autoload: true,
@@ -30,15 +32,6 @@ module.exports = class Db {
       // beforeDeserialization: data => base64.decode(data),
     };
     this.collections = new Map();
-    // this.collections.set(
-    //   'system',
-    //   new DataStore({
-    //     ...this.dbCommonConfig,
-    //     filename: path.resolve(__dirname, 'db', 'system'),
-    //   })
-    // );
-    console.log('============  =============');
-    console.log(process.env.NODE_ENV);
     this.dbPath =
       process.env.NODE_ENV === 'development'
         ? path.resolve(__dirname, 'db')
@@ -50,15 +43,6 @@ module.exports = class Db {
     if (!fs.existsSync(this.dbPath)) {
       fs.mkdirSync(this.dbPath);
     }
-
-    if (!this.collections.has('experiment')) {
-      this.addCollection('experiment');
-    }
-    if (!this.collections.has('log')) {
-      this.addCollection('log');
-    }
-    console.log('============ fs.stat(this.dbPath) =============');
-    console.log(fs.existsSync(this.dbPath));
     const dbFiles = this.getDbFiles(this.dbPath);
     dbFiles.forEach(file => {
       this.collections.set(
@@ -69,6 +53,12 @@ module.exports = class Db {
         })
       );
     });
+    if (!this.collections.has('experiment')) {
+      this.addCollection('experiment');
+    }
+    if (!this.collections.has('log')) {
+      this.addCollection('log');
+    }
   }
 
   getDbFiles(dir) {
@@ -101,4 +91,4 @@ module.exports = class Db {
       })
     );
   }
-};
+}

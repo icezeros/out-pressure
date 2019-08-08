@@ -25,7 +25,6 @@ function checkQuit(mainWindow, event) {
 export default function handleQuit() {
   //   const mainWindow = BrowserWindow.fromId(global.mainId);
   const mainWindow = global.application.windowManager.getWindow('main');
-  const mainWindows = global.application.windowManager.getWindows();
   mainWindow.on('close', event => {
     event.preventDefault();
     checkQuit(mainWindow, event);
