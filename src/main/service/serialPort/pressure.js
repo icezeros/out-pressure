@@ -37,7 +37,8 @@ export default async function analyPressure({ time, data }) {
   //   console.log(basePressure);
   //   console.log();
   if (
-    pressure.baseValue !== basePressure.baseValue ||
+    (pressure.baseValue !== basePressure.baseValue &&
+      Math.abs(basePressure.time - pressure.time) > 200) ||
     Math.abs(basePressure.time - pressure.time) > 1000
   ) {
     pressure.baseValue = basePressure.baseValue;
