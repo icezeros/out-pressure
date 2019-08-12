@@ -31,11 +31,6 @@ export default async function analyPressure({ time, data }) {
     time: time,
     baseValue: Number(arr[2]),
   };
-  //   console.log('============ arr =============');
-  //   console.log(arr);
-  //   console.log('============ basePressure =============');
-  //   console.log(basePressure);
-  //   console.log();
   if (
     (pressure.baseValue !== basePressure.baseValue &&
       Math.abs(basePressure.time - pressure.time) > 200) ||
@@ -61,10 +56,13 @@ export default async function analyPressure({ time, data }) {
         };
         log.insert({
           baseTime: pressure.baseTime.format('x'),
-          baseValue: pressure.pressure,
+          baseValue: pressure.baseValue,
           offset: pressure.offset,
           value: pressure.value,
           index: pressure.index,
+          relativeIndex: moment
+            .duration(pressure.time - pressure.job.time, 'ms')
+            .asMilliseconds(),
           time: pressure.time.format('x'),
           experimentId: pressure.job._id,
         });

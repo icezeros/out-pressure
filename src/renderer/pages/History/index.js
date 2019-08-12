@@ -1,4 +1,4 @@
-import { Table, Divider, Tag, Modal /* Card */ } from 'antd';
+import { Table, Divider, Tag, Modal, message /* Card */ } from 'antd';
 import React, { Component } from 'react';
 import ChartModal from './chart-modal';
 import Card from '@material-ui/core/Card';
@@ -101,6 +101,15 @@ export default class History extends Component {
   }
   componentWillMount() {
     this.rendDataByPages({ current: 1, pageSize: 10 });
+    ipcRenderer.on('export-history-result', (event, data) => {
+      console.log('============ event,data =============');
+      console.log(event, data);
+      if (data && data.type) {
+        message.success(data.message, 5);
+      } else {
+        message.error(data.message, 5);
+      }
+    });
   }
   onChangePage = pageInfo => {
     this.rendDataByPages(pageInfo);
@@ -110,7 +119,6 @@ export default class History extends Component {
   rendDataByPages = pageInfo => {
     console.log('============ pageInfo =============');
     console.log(pageInfo);
-
     const { data, total } = ipcRenderer.sendSync(
       'get-history-page-sync',
       pageInfo
@@ -118,6 +126,20 @@ export default class History extends Component {
     console.log('============ result =============');
     console.log(data);
     // { total: 500, defaultCurrent: 1, current: 1 },
+    this.setState({
+      pageInfo: { ...pageInfo, total: total },
+      data: data,
+    });
+  };
+  exportData = record => {
+    ipcRenderer.send('export-history-info', record._id);
+  };
+  deleteData = record => {
+    const pageInfo = this.state.pageInfo;
+    const { data, total } = ipcRenderer.sendSync('delete-history-info-sync', {
+      _id: record._id,
+      pageInfo: pageInfo,
+    });
     this.setState({
       pageInfo: { ...pageInfo, total: total },
       data: data,
@@ -167,7 +189,7 @@ export default class History extends Component {
           elevation={20}
           style={{
             marginTop: 10,
-            paddingTop: 10,
+            padding: 10,
           }}
         >
           {''}
@@ -223,9 +245,9 @@ export default class History extends Component {
                     详情 {record.lastName}
                   </a>
                   <Divider type="vertical" />
-                  <a href="javascript:;">导出</a>
+                  <a onClick={() => this.exportData(record)}>导出</a>
                   <Divider type="vertical" />
-                  <a href="javascript:;">删除</a>
+                  <a onClick={() => this.deleteData(record)}>删除</a>
                 </span>
               )}
             />

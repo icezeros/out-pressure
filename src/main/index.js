@@ -50,19 +50,18 @@ async function init() {
   dbInit();
   await handelAppReady();
   const result = await SerialPort.scanPort();
-  console.log('============ result =============');
-  console.log(result);
   handleQuit();
   handleMessage();
-  pressureInit();
+  await clearData();
+  //   pressureInit();
   let i = 0;
-  //   setInterval(() => {
-  //     const a = Math.floor(Math.random() * 100);
-  //     analyPressure({
-  //       time: moment(),
-  //       data: `ST,NT,+000${a}.00\r\n`,
-  //     });
-  //   }, 1000);
+  setInterval(() => {
+    const a = Math.floor(Math.random() * 100);
+    analyPressure({
+      time: moment(),
+      data: `ST,NT,+000${a}.00\r\n`,
+    });
+  }, 1000);
 }
 function dbInit() {
   global.db = new Db();
@@ -117,6 +116,44 @@ function handleAppWillQuit() {
   });
 }
 
+async function clearData() {
+  const db = global.db;
+  if (!db) {
+    throw new Error('db is not ready');
+  }
+  const log = db.collections.get('log');
+  const experiment = db.collections.get('experiment');
+  const experimentsUnFinished = await experiment.asyncFind({
+    status: { $ne: 'finished' },
+  });
+  const experimentsFinished = await experiment.asyncFind(
+    {
+      status: 'finished',
+    },
+    [['sort', { index: -1 }], ['skip', 100]]
+  );
+  const experimentsUnFinishedIds = experimentsUnFinished.map(item => item._id);
+  const experimentsFinishedIds = experimentsFinished.map(item => item._id);
+  const experimentsIds = [
+    ...experimentsUnFinishedIds,
+    ...experimentsFinishedIds,
+  ];
+  const logs = await log.asyncFind({ experimentId: { $in: experimentsIds } });
+  await log.asyncRemove(
+    {
+      experimentId: { $in: experimentsIds },
+    },
+    {
+      multi: true,
+    }
+  );
+  await experiment.asyncRemove(
+    { _id: { $in: experimentsIds } },
+    {
+      multi: true,
+    }
+  );
+}
 // makeSingleInstance(init);
 init();
 // const test = new Db();

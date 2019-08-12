@@ -4,6 +4,8 @@ import './index.css';
 import { connect } from 'dva';
 import Fab from '@material-ui/core/Fab';
 import Icon from '@material-ui/core/Icon';
+import { ReactComponent as Shutdown } from './shutdown.svg';
+import ShutdownModal from './shutdown-modal';
 
 const { Header } = Layout;
 
@@ -15,8 +17,6 @@ const { Header } = Layout;
 class HeaderComponent extends Component {
   constructor(props) {
     super(props);
-    console.log('============ location.hash =============');
-    console.log(location.hash);
     const hash = location.hash.split('/')[1];
     console.log(hash);
   }
@@ -39,11 +39,16 @@ class HeaderComponent extends Component {
             )}
           </Col>
           <Col style={{ paddingLeft: 200 }} span={8}>
-            <Fab size="small" variant="extended" aria-label="Edit">
-              关机
+            <Fab size="small" aria-label="Edit">
+              <Icon component={Shutdown} />
             </Fab>
           </Col>
         </Row>
+        <ShutdownModal
+          visible={false}
+          handleOk={this.handleOk}
+          handleCancel={this.handleCancel}
+        />
       </Header>
     );
   }

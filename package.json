@@ -93,7 +93,9 @@
     "react-dom": "^16.8.6",
     "recharts": "^1.6.2",
     "serialport": "^7.1.5",
-    "slash": "^3.0.0"
+    "shelljs": "^0.8.3",
+    "slash": "^3.0.0",
+    "xls-write": "^1.0.6"
   },
   "electronWebpack": {
     "main": {
