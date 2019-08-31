@@ -38,8 +38,12 @@ export default function handleHistoryMessage() {
   });
 
   ipcMain.on('export-history-info', async (event, id) => {
-    //   const devRootPath = '/media/pi';
-    const devRootPath = '/Users/huguosen/Documents/GitHub/out-pressure/src';
+    let devRootPath = '/media/pi';
+    if (process.env.NODE_ENV === 'develop') {
+      devRootPath = '/Users/huguosen/Documents/GitHub/out-pressure/src';
+    } else {
+      devRootPath = '/media/pi';
+    }
     const list = fs.readdirSync(devRootPath);
     if (list.length === 0) {
       event.sender.send('export-history-result', {
@@ -48,8 +52,8 @@ export default function handleHistoryMessage() {
       });
       return;
     }
-    // const outDir = path.join(devRootPath, list[0]);
-    const outDir = devRootPath;
+    const outDir = path.join(devRootPath, list[0]);
+    // const outDir = devRootPath;
     console.log('============ outDir =============');
     console.log(outDir);
     const log = global.db.collections.get('log');
