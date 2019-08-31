@@ -53,7 +53,7 @@ async function init() {
   handleQuit();
   handleMessage();
   await clearData();
-  if (process.env.NODE_ENV === 'development') {
+  if (true /* process.env.NODE_ENV === 'development' */) {
     setInterval(() => {
       const a = Math.floor(Math.random() * 100);
       analyPressure({
