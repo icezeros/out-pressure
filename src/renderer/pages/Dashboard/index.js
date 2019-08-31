@@ -94,7 +94,7 @@ export default class Home extends PureComponent {
               >
                 压力归零
               </Button>
-              <Divider>压力</Divider>
+              <Divider>压力(单位:0.001N)</Divider>
               <Pressure />
             </Paper>
           </Col>

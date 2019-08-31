@@ -1,4 +1,12 @@
-import { Table, Divider, Tag, Modal, message /* Card */ } from 'antd';
+import {
+  Table,
+  Divider,
+  Tag,
+  Modal,
+  Popconfirm,
+  Icon,
+  message /* Card */,
+} from 'antd';
 import React, { Component } from 'react';
 import ChartModal from './chart-modal';
 import Card from '@material-ui/core/Card';
@@ -247,7 +255,18 @@ export default class History extends Component {
                   <Divider type="vertical" />
                   <a onClick={() => this.exportData(record)}>导出</a>
                   <Divider type="vertical" />
-                  <a onClick={() => this.deleteData(record)}>删除</a>
+                  <Popconfirm
+                    title="你确定要删除吗（删除后无法恢复）？"
+                    placement="topRight"
+                    onConfirm={() => this.deleteData(record)}
+                    icon={
+                      <Icon type="question-circle-o" style={{ color: 'red' }} />
+                    }
+                  >
+                    <a>删除</a>
+                  </Popconfirm>
+                  {/* <a onClick={() => this.deleteData(record)}>删除</a> */}
+                  {/* <Divider type="vertical" /> */}
                 </span>
               )}
             />

@@ -5,88 +5,6 @@ import Card from '@material-ui/core/Card';
 import Paper from '@material-ui/core/Paper';
 const { Column, ColumnGroup } = Table;
 
-const data = [
-  {
-    key: '1',
-    firstName: 'John',
-    lastName: 'Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer'],
-  },
-  {
-    key: '2',
-    firstName: 'Jim',
-    lastName: 'Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: ['loser'],
-  },
-  {
-    key: '3',
-    firstName: 'Joe',
-    lastName: 'Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
-  {
-    key: '1',
-    firstName: 'John',
-    lastName: 'Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer'],
-  },
-  {
-    key: '2',
-    firstName: 'Jim',
-    lastName: 'Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: ['loser'],
-  },
-  {
-    key: '3',
-    firstName: 'Joe',
-    lastName: 'Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
-  {
-    key: '1',
-    firstName: 'John',
-    lastName: 'Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer'],
-  },
-  {
-    key: '2',
-    firstName: 'Jim',
-    lastName: 'Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: ['loser'],
-  },
-  {
-    key: '3',
-    firstName: 'Joe',
-    lastName: 'Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
-  {
-    key: '3',
-    firstName: 'Joe',
-    lastName: 'Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
-];
 export default class Setting extends Component {
   render() {
     return (
@@ -102,17 +20,19 @@ export default class Setting extends Component {
               {/* <Button variant="contained" fullWidth color="primary">
                 仪 表 设 置
               </Button> */}
-              <Card
+              {/* <Card
                 variant="contained"
                 fullWidth
                 color="primary"
                 style={{
-                  padding: 10,
-                  backgroundColor: '#fff',
+                  backgroundColor: '#112133',
                 }}
               >
+                <p>仪 表 设 置</p>
+              </Card> */}
+              <Button variant="contained" fullWidth color="#112133">
                 仪 表 设 置
-              </Card>
+              </Button>
               <Divider />
               <p style={{ size: 66 }}>{}</p>
             </Paper>
@@ -124,8 +44,8 @@ export default class Setting extends Component {
               title="XXXXX"
               style={{ height: 330, padding: 20 }}
             >
-              <Button variant="contained" fullWidth color="primary">
-                XXXX
+              <Button variant="contained" fullWidth color="#112133">
+                历史数据设置
               </Button>
               <Divider />
             </Paper>
