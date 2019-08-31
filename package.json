@@ -95,7 +95,7 @@
     "serialport": "^7.1.5",
     "shelljs": "^0.8.3",
     "slash": "^3.0.0",
-    "xls-write": "^1.0.6"
+    "xls-write": "^1.0.7"
   },
   "electronWebpack": {
     "main": {
