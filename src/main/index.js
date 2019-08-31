@@ -53,15 +53,17 @@ async function init() {
   handleQuit();
   handleMessage();
   await clearData();
-  //   pressureInit();
-  let i = 0;
-  setInterval(() => {
-    const a = Math.floor(Math.random() * 100);
-    analyPressure({
-      time: moment(),
-      data: `ST,NT,+000${a}.00\r\n`,
-    });
-  }, 1000);
+  if (process.env.NODE_ENV === 'development') {
+    setInterval(() => {
+      const a = Math.floor(Math.random() * 100);
+      analyPressure({
+        time: moment(),
+        data: `ST,NT,+000${a}.00\r\n`,
+      });
+    }, 1000);
+  } else {
+    pressureInit();
+  }
 }
 function dbInit() {
   global.db = new Db();

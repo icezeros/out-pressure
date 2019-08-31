@@ -15,8 +15,8 @@ import {
 import { connect } from 'dva';
 import moment from 'moment';
 @connect(({ sensor }) => ({
-  sensor,
   historyPressures: sensor.historyPressures,
+  chartInfo: sensor.chartInfo,
 }))
 export default class Chart extends Component {
   constructor() {
@@ -45,22 +45,23 @@ export default class Chart extends Component {
     console.log(a);
   };
   render() {
-    const { historyPressures = [] } = this.props;
+    const { historyPressures = [], chartInfo } = this.props;
     const { autoMove, startIndex, endIndex, areaLength } = this.state;
+    const { startIndexTmp, endIndexTmp, ticks } = chartInfo;
 
-    const endIndexTmp = autoMove ? historyPressures.length - 1 : endIndex;
-    const startIndexTmp = autoMove
-      ? endIndexTmp - areaLength > 0
-        ? endIndexTmp - areaLength
-        : 0
-      : startIndex;
-    console.log('========= endIndexTmp==========');
-    console.log(endIndexTmp);
-    console.log();
+    // const endIndexTmp = autoMove ? historyPressures.length - 1 : endIndex;
+    // const startIndexTmp = autoMove
+    //   ? endIndexTmp - areaLength > 0
+    //     ? endIndexTmp - areaLength
+    //     : 0
+    //   : startIndex;
+    // console.log('========= endIndexTmp==========');
+    // console.log(endIndexTmp);
+    // console.log();
 
-    console.log('========= startIndexTmp==========');
-    console.log(startIndexTmp);
-    console.log();
+    // console.log('========= startIndexTmp==========');
+    // console.log(startIndexTmp);
+    // console.log();
     return (
       <div className="line-chart-wrapper">
         <LineChart
@@ -138,10 +139,13 @@ export default class Chart extends Component {
                 interval="10"
                 dataKey="index"
                 domain={[
-                  (historyPressures[0] && historyPressures[0].index) || 'auto',
-                  (historyPressures[historyPressures.length - 1] &&
-                    historyPressures[historyPressures.length - 1].index) ||
-                    'auto' ||
+                  (historyPressures &&
+                    historyPressures[startIndexTmp] &&
+                    historyPressures[startIndexTmp].index) ||
+                    'auto',
+                  (historyPressures &&
+                    historyPressures[endIndexTmp] &&
+                    historyPressures[endIndexTmp].index) ||
                     'auto',
                 ]}
                 type="number"
