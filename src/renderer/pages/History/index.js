@@ -110,15 +110,15 @@ export default class History extends Component {
   componentDidMount() {
     this.rendDataByPages({ current: 1, pageSize: 10 });
 
-    ipcRenderer.on('export-history-result', (event, data) => {
-      console.log('============ event,data =============');
-      console.log(event, data);
-      if (data && data.type) {
-        message.success(data.message, 5);
-      } else {
-        message.error(data.message, 5);
-      }
-    });
+    // ipcRenderer.on('export-history-result', (event, data) => {
+    //   console.log('============ event,data =============');
+    //   console.log(event, data);
+    //   if (data && data.type) {
+    //     message.success(data.message, 5);
+    //   } else {
+    //     message.error(data.message, 5);
+    //   }
+    // });
   }
   //   componentWillMount() {
   //   }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Layout, LocaleProvider } from 'antd';
+import { Layout, LocaleProvider, message } from 'antd';
 import { connect } from 'dva';
 import Card from '@material-ui/core/Card';
 import 'antd/dist/antd.less';
@@ -31,6 +31,15 @@ export default class App extends Component {
           pressure: msg,
         },
       });
+    });
+    ipcRenderer.on('export-history-result', (event, data) => {
+      console.log('============ event,data =============');
+      console.log(event, data);
+      if (data && data.type) {
+        message.success(data.message, 5);
+      } else {
+        message.error(data.message, 5);
+      }
     });
   }
 
