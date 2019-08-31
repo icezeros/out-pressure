@@ -107,8 +107,9 @@ export default class History extends Component {
       chartData: [],
     };
   }
-  componentWillMount() {
+  componentDidMount() {
     this.rendDataByPages({ current: 1, pageSize: 10 });
+
     ipcRenderer.on('export-history-result', (event, data) => {
       console.log('============ event,data =============');
       console.log(event, data);
@@ -119,6 +120,8 @@ export default class History extends Component {
       }
     });
   }
+  //   componentWillMount() {
+  //   }
   onChangePage = pageInfo => {
     this.rendDataByPages(pageInfo);
   };
